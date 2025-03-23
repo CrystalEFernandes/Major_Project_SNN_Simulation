@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Visualization</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.21.0/cytoscape.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #cy { width: 80%; height: 500px; margin: auto; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Real-Time Network Visualization</h1>
+    <div id="cy"></div>
+
+    <script>
+        let cy = cytoscape({
+            container: document.getElementById('cy'),
+            style: [
+                { selector: 'node', style: { 'background-color': '#666', 'label': 'data(id)', 'width': 30, 'height': 30 } },
+                { selector: 'edge', style: { 'width': 2, 'line-color': '#ccc', 'target-arrow-color': '#ccc', 'target-arrow-shape': 'triangle' } },
+                { selector: '.highlighted', style: { 'background-color': 'yellow', 'line-color': 'yellow', 'target-arrow-color': 'yellow', 'width': 4 } }
+            ],
+            layout: { name: 'cose' }
+        });
+
+        function updateGraph() {
+            fetch('/api/network/')
+                .then(response => response.json())
+                .then(data => {
+                    cy.elements().remove();
+                    let elements = [];
+
+                    // Add nodes
+                    for (let node in data.graph) {
+                        elements.push({ data: { id: node } });
+                    }
+
+                    // Add edges
+                    for (let src in data.graph) {
+                        for (let dest in data.graph[src]) {
+                            elements.push({ data: { source: src, target: dest, weight: data.graph[src][dest] } });
+                        }
+                    }
+
+                    cy.add(elements);
+                    cy.layout({ name: 'cose' }).run();
+
+                    // Highlight best path
+                    if (data.best_path) {
+                        data.best_path.forEach((node, index) => {
+                            if (index < data.best_path.length - 1) {
+                                cy.$(`edge[source="${node}"][target="${data.best_path[index + 1]}"]`).addClass('highlighted');
+                                cy.$(`node[id="${node}"]`).addClass('highlighted');
+                            }
+                        });
+                    }
+                });
+        }
+
+        setInterval(updateGraph, 5000);
+        updateGraph();
+    </script>
+</body>
+</html>

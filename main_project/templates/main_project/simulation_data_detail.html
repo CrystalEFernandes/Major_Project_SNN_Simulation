@@ -1,0 +1,410 @@
+{% load humanize %}
+{% load custom_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation Data Point Details - ID: {{ data_point.id }} - Mazer Admin Dashboard</title>
+
+    <link rel="shortcut icon" href="{% static 'assets/compiled/svg/favicon.svg' %}" type="image/x-icon">
+
+
+    <link rel="stylesheet" href="{% static 'assets/compiled/css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/compiled/css/app-dark.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/compiled/css/iconly.css' %}">
+    <style>
+        .detail-subsection h3 {
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 3px;
+            margin-top: 15px;
+        }
+
+        .detail-subsection h4 {
+            margin-top: 10px;
+            /* Add some space above subsection h4 */
+        }
+    </style>
+</head>
+
+<body>
+    <script src="{% static 'assets/static/js/initTheme.js' %}"></script>
+    <div id="app">
+        <div id="sidebar">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header position-relative">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="logo">
+                            <a href="index.html"><img src="{% static 'assets/compiled/svg/logo.svg' %}" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                role="img" class="iconify iconify--system-uicons" width="20" height="20"
+                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
+                                        opacity=".3"></path>
+                                    <g transform="translate(-210 -1)">
+                                        <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
+                                        <circle cx="220.5" cy="11.5" r="4"></circle>
+                                        <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <div class="form-check form-switch fs-6">
+                                <input class="form-check-input  me-0" type="checkbox" id="toggle-dark" style="cursor: pointer">
+                                <label class="form-check-label"></label>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                role="img" class="iconify iconify--mdi" width="20" height="20" preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="sidebar-toggler  x">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item">
+                            <a href="/dashboard/" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item active">
+                            <a href="/simulation-data/" class='sidebar-link'>
+                                <i class="bi bi-card-list"></i>  
+                                <span>Simulation List</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="/simulation-log/" class='sidebar-link'>
+                                <i class="bi-clock-history"></i>  
+                                <span>Logs and History</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="/snn-control-panel/" class='sidebar-link'>
+                                <i class="bi-gear-fill"></i>  
+                                <span>SNN Settiings</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <h3>Simulation Data Point Details</h3>
+                    <!-- Button trigger for BorderLess Modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#neighborScoresModal"
+                        style="margin-left: auto;">
+                        More Details
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="page-content">
+                <!-- General Information and Routing Accordion -->
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">General & Routing Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Toggle the accordion item to view general and routing information about this simulation data point.</p>
+                            <div class="accordion" id="generalInfoAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingGeneralInfo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseGeneralInfo" aria-expanded="false"
+                                            aria-controls="collapseGeneralInfo">
+                                            Simulation Data Point
+                                        </button>
+                                    </h2>
+                                    <div id="collapseGeneralInfo" class="accordion-collapse collapse"
+                                        aria-labelledby="headingGeneralInfo" data-bs-parent="#generalInfoAccordion">
+                                        <div class="accordion-body">
+                                            <div class="detail-item"><strong>ID:</strong> {{ data_point.id }}</div>
+                                            <div class="detail-item"><strong>Timestamp:</strong> {{ data_point.timestamp }}</div>
+                                            <div class="detail-item"><strong>Simulation Time (ms):</strong> {{ data_point.simulation_time_ms }}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingRoutingInfo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseRoutingInfo" aria-expanded="false"
+                                            aria-controls="collapseRoutingInfo">
+                                            Routing Details
+                                        </button>
+                                    </h2>
+                                    <div id="collapseRoutingInfo" class="accordion-collapse collapse"
+                                        aria-labelledby="headingRoutingInfo" data-bs-parent="#generalInfoAccordion">
+                                        <div class="accordion-body">
+                                            {% if routing_path %}
+                                            <div class="detail-subsection">
+                                                <div class="detail-item"><strong>Routing Path ID:</strong> {{ routing_path.id }}</div>
+                                                <div class="detail-item"><strong>STDP Path Score:</strong>
+                                                    {{ routing_path.stdp_path_score|default:"N/A" }}</div>
+
+                                                <div class="detail-subsection">
+                                                    <h4>STDP-DFS Path</h4>
+                                                    <p>{{ routing_path.stdp_path}}</p>
+                                                </div>
+
+                                                <div class="detail-item">
+                                                    <a href="#">Show STDP Path Graph (Coming Soon)</a>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            <p>No routing path information available for this data point.</p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Accordion section end -->
+
+                <!-- Firing Rates Accordion -->
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Firing Rates</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Toggle to view firing rates for each neuron.</p>
+                            <div class="accordion" id="firingRatesAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingFiringRates">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseFiringRates" aria-expanded="false"
+                                            aria-controls="collapseFiringRates">
+                                            Firing Rates Details
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFiringRates" class="accordion-collapse collapse"
+                                        aria-labelledby="headingFiringRates" data-bs-parent="#firingRatesAccordion">
+                                        <div class="accordion-body">
+                                            <ul class="list-group">
+                                                {% for rate in firing_rates %}
+                                                <li class="list-group-item">Neuron {{ forloop.counter0 }}: {{ rate }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Latencies Accordion -->
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Latencies (ms)</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Toggle to view latencies for each neuron.</p>
+                            <div class="accordion" id="latenciesAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingLatencies">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseLatencies" aria-expanded="false"
+                                            aria-controls="collapseLatencies">
+                                            Latencies (ms) Details
+                                        </button>
+                                    </h2>
+                                    <div id="collapseLatencies" class="accordion-collapse collapse"
+                                        aria-labelledby="headingLatencies" data-bs-parent="#latenciesAccordion">
+                                        <div class="accordion-body">
+                                            <ul class="list-group">
+                                                {% for latency in latencies_ms %}
+                                                <li class="list-group-item">Neuron {{ forloop.counter0 }}: {{ latency }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Energy Levels Accordion -->
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Energy Levels</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Toggle to view energy levels for each neuron.</p>
+                            <div class="accordion" id="energyLevelsAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingEnergyLevels">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseEnergyLevels" aria-expanded="false"
+                                            aria-controls="collapseEnergyLevels">
+                                            Energy Levels Details
+                                        </button>
+                                    </h2>
+                                    <div id="collapseEnergyLevels" class="accordion-collapse collapse"
+                                        aria-labelledby="headingEnergyLevels" data-bs-parent="#energyLevelsAccordion">
+                                        <div class="accordion-body">
+                                            <ul class="list-group">
+                                                {% for energy in energy_levels %}
+                                                <li class="list-group-item">Neuron {{ forloop.counter0 }}: {{ energy }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Congestion Levels Accordion -->
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Congestion Levels</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Toggle to view congestion levels for each neuron.</p>
+                            <div class="accordion" id="congestionLevelsAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingCongestionLevels">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseCongestionLevels" aria-expanded="false"
+                                            aria-controls="collapseCongestionLevels">
+                                            Congestion Levels Details
+                                        </button>
+                                    </h2>
+                                    <div id="collapseCongestionLevels" class="accordion-collapse collapse"
+                                        aria-labelledby="headingCongestionLevels" data-bs-parent="#congestionLevelsAccordion">
+                                        <div class="accordion-body">
+                                            <ul class="list-group">
+                                                {% for congestion in congestion_levels %}
+                                                <li class="list-group-item">Neuron {{ forloop.counter0 }}: {{ congestion }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+
+
+            <!--BorderLess Modal Modal -->
+            <div class="modal fade text-left modal-borderless" id="neighborScoresModal" tabindex="-1" role="dialog"
+                aria-labelledby="neighborScoresModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="neighborScoresModalLabel">STDP Pathfinding - Neighbor Scores at Each Step</h5>
+                            <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% if routing_path.neighbor_scores_history_json %}
+                            {% with neighbor_scores_history=routing_path.neighbor_scores_history_json|safe|json_loads %}
+                            {% for source_node_id, neighbor_data in neighbor_scores_history.items %}
+                            <div class="detail-subsection">
+                                <h3>Source Node {{ source_node_id }} - Neighbor Scores</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Neighbor Node</th>
+                                                <th>Composite Score</th>
+                                                <th>Latency Score</th>
+                                                <th>Energy Score</th>
+                                                <th>Congestion Score</th>
+                                                <th>Firing Rate</th>
+                                                <th>Latency (ms)</th>
+                                                <th>Energy Level</th>
+                                                <th>Congestion Level</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for neighbor_node_id, metrics in neighbor_data.items %}
+                                            <tr>
+                                                <td>{{ neighbor_node_id }}</td>
+                                                <td>{{ metrics.composite_score|floatformat:2|default:"N/A" }}</td>
+                                                <td>{{ metrics.latency_score|floatformat:2|default:"N/A" }}</td>
+                                                <td>{{ metrics.energy_score|floatformat:2|default:"N/A" }}</td>
+                                                <td>{{ metrics.congestion_score|floatformat:2|default:"N/A" }}</td>
+                                                <td>{{ metrics.firing_rate|floatformat:2|default:"N/A" }}</td>
+                                                <td>{{ metrics.latency_ms|floatformat:2|default:"N/A" }}</td>
+                                                <td>{{ metrics.energy_level|floatformat:2|default:"N/A" }}</td>
+                                                <td>{{ metrics.congestion_level|floatformat:2|default:"N/A" }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endwith %}
+                            {% else %}
+                            <p>No neighbor scores history available for this data point.</p>
+                            {% endif %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="{% static 'assets/static/js/components/dark.js' %}"></script>
+    <script src="{% static 'assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'assets/compiled/js/app.js' %}"></script>
+    <script src="{% static 'assets/extensions/json-js/json2.js' %}"></script>
+    <script src="{% static 'assets/extensions/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/extensions/feather-icons/feather.min.js' %}"></script>
+    <script src="{% static 'assets/static/js/pages/feather-icons.js' %}"></script>
+
+
+</body>
+
+</html>

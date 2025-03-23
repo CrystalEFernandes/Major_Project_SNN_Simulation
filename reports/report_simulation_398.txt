@@ -1,0 +1,3 @@
+The path was taken because neighbor 1 had the highest composite score among all neighbors and thus was selected for further exploration. The composite score is a weighted sum of latency, energy, congestion, and firing rate, with higher scores indicating a more favorable path. 
+
+In this case, neighbor 1 had a lower latency, higher energy, and lower congestion and firing rate compared to the other neighbors. This combination of factors resulted in a higher overall composite score and led to its selection as the preferred path.

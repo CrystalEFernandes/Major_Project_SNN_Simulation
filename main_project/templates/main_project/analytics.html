@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas { width: 80%; margin: auto; }
+    </style>
+</head>
+<body>
+    <h1>Performance Analytics</h1>
+    <canvas id="latencyChart"></canvas>
+    <canvas id="energyChart"></canvas>
+    <canvas id="packetChart"></canvas>
+    <button onclick="downloadCSV()">Download CSV</button>
+    <button onclick="downloadPDF()">Download PDF</button>
+
+    <script>
+        let latencyChart, energyChart, packetChart;
+
+        function fetchPerformanceData() {
+            fetch('/api/performance/')
+                .then(response => response.json())
+                .then(data => {
+                    let timestamps = data.map(d => d.timestamp);
+                    let latencies = data.map(d => d.latency);
+                    let energies = data.map(d => d.energy);
+                    let packets = data.map(d => d.packets);
+
+                    if (!latencyChart) {
+                        latencyChart = new Chart(document.getElementById('latencyChart').getContext('2d'), {
+                            type: 'line',
+                            data: { labels: timestamps, datasets: [{ label: 'Latency', data: latencies, borderColor: 'red' }] }
+                        });
+                    } else { latencyChart.data.labels = timestamps; latencyChart.data.datasets[0].data = latencies; latencyChart.update(); }
+
+                    if (!energyChart) {
+                        energyChart = new Chart(document.getElementById('energyChart').getContext('2d'), {
+                            type: 'line',
+                            data: { labels: timestamps, datasets: [{ label: 'Energy', data: energies, borderColor: 'blue' }] }
+                        });
+                    } else { energyChart.data.labels = timestamps; energyChart.data.datasets[0].data = energies; energyChart.update(); }
+
+                    if (!packetChart) {
+                        packetChart = new Chart(document.getElementById('packetChart').getContext('2d'), {
+                            type: 'line',
+                            data: { labels: timestamps, datasets: [{ label: 'Packets', data: packets, borderColor: 'green' }] }
+                        });
+                    } else { packetChart.data.labels = timestamps; packetChart.data.datasets[0].data = packets; packetChart.update(); }
+                });
+        }
+
+        function downloadCSV() {
+            fetch('/api/performance/')
+                .then(response => response.json())
+                .then(data => {
+                    let csvContent = "Timestamp,Latency,Energy,Packets\n";
+                    data.forEach(row => {
+                        csvContent += `${row.timestamp},${row.latency},${row.energy},${row.packets}\n`;
+                    });
+                    let blob = new Blob([csvContent], { type: 'text/csv' });
+                    let link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = "performance_data.csv";
+                    link.click();
+                });
+        }
+
+        function downloadPDF() {
+            window.open('/download_pdf/', '_blank');
+        }
+
+        setInterval(fetchPerformanceData, 5000);
+        fetchPerformanceData();
+    </script>
+</body>
+</html>

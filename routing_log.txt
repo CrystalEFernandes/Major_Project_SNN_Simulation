@@ -1,0 +1,1203 @@
+2025-02-07 23:26:32,543 - Not Found: /api/snn_settings/
+2025-02-07 23:28:09,930 - Not Found: /api/snn_settings/
+2025-02-07 23:29:34,773 - Internal Server Error: /api/update_status/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_network_status didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:29:35,313 - Not Found: /favicon.ico
+2025-02-07 23:29:39,576 - Internal Server Error: /api/update_status/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_network_status didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:29:44,640 - Internal Server Error: /api/update_status/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_network_status didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:29:49,574 - Internal Server Error: /api/update_status/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_network_status didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:29:54,564 - Internal Server Error: /api/update_status/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_network_status didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:29:58,153 - Not Found: /api/snn_settings/
+2025-02-07 23:31:05,442 - Internal Server Error: /api/update_routing/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_routing didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:31:08,822 - Internal Server Error: /api/update_routing/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_routing didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:31:13,691 - Internal Server Error: /api/update_routing/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_routing didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:31:18,702 - Internal Server Error: /api/update_routing/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_routing didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:31:23,950 - Internal Server Error: /api/update_routing/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_routing didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:31:28,936 - Internal Server Error: /api/update_routing/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_routing didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:31:33,960 - Internal Server Error: /api/update_routing/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_routing didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:31:39,016 - Internal Server Error: /api/update_routing/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_routing didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:42:36,138 - Internal Server Error: /api/update_status/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_network_status didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:42:41,132 - Internal Server Error: /api/update_status/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view main_project.views.update_network_status didn't return an HttpResponse object. It returned None instead.
+2025-02-07 23:44:26,361 - C:\Users\Hp\major_project\main_project\views.py changed, reloading.
+2025-02-07 23:44:39,270 - Not Found: /api/update_status/
+2025-02-07 23:44:44,268 - Not Found: /api/update_status/
+2025-02-07 23:44:49,280 - Not Found: /api/update_status/
+2025-02-07 23:44:54,272 - Not Found: /api/update_status/
+2025-02-07 23:44:59,269 - Not Found: /api/update_status/
+2025-02-07 23:45:04,271 - Not Found: /api/update_status/
+2025-02-07 23:45:09,270 - Not Found: /api/update_status/
+2025-02-07 23:48:50,181 - Not Found: /api/update_status/
+2025-02-07 23:48:52,052 - Not Found: /api/update_status/
+2025-02-07 23:48:57,050 - Not Found: /api/update_status/
+2025-02-07 23:49:02,053 - Not Found: /api/update_status/
+2025-02-07 23:49:07,055 - Not Found: /api/update_status/
+2025-02-07 23:49:12,053 - Not Found: /api/update_status/
+2025-02-07 23:49:12,131 - Not Found: /api/snn_settings/
+2025-02-07 23:49:17,054 - Not Found: /api/update_status/
+2025-02-07 23:49:43,176 - Not Found: /api/snn_settings/
+2025-02-07 23:50:02,509 - Not Found: /api/snn_settings/
+2025-02-07 23:52:39,149 - Not Found: /api/snn_settings/
+2025-02-07 23:52:44,378 - Bad Request: /api/update_routing/
+2025-02-07 23:52:49,703 - Bad Request: /api/update_routing/
+2025-02-07 23:52:55,140 - Bad Request: /api/update_routing/
+2025-02-07 23:53:00,473 - Bad Request: /api/update_routing/
+2025-02-07 23:53:05,894 - Bad Request: /api/update_routing/
+2025-02-07 23:53:11,188 - Bad Request: /api/update_routing/
+2025-02-07 23:53:16,497 - Bad Request: /api/update_routing/
+2025-02-07 23:53:21,768 - Bad Request: /api/update_routing/
+2025-02-07 23:53:27,046 - Bad Request: /api/update_routing/
+2025-02-07 23:53:32,378 - Bad Request: /api/update_routing/
+2025-02-07 23:53:37,742 - Bad Request: /api/update_routing/
+2025-02-07 23:53:43,022 - Bad Request: /api/update_routing/
+2025-02-07 23:53:44,609 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:53:48,380 - Bad Request: /api/update_routing/
+2025-02-07 23:53:49,949 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:53:53,670 - Bad Request: /api/update_routing/
+2025-02-07 23:53:54,924 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:53:59,095 - Bad Request: /api/update_routing/
+2025-02-07 23:53:59,955 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:04,951 - Bad Request: /api/update_routing/
+2025-02-07 23:54:05,162 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:09,941 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:10,339 - Bad Request: /api/update_routing/
+2025-02-07 23:54:15,005 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:15,699 - Bad Request: /api/update_routing/
+2025-02-07 23:54:19,921 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:21,128 - Bad Request: /api/update_routing/
+2025-02-07 23:54:24,966 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:26,417 - Bad Request: /api/update_routing/
+2025-02-07 23:54:29,926 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:31,724 - Bad Request: /api/update_routing/
+2025-02-07 23:54:34,929 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:37,142 - Bad Request: /api/update_routing/
+2025-02-07 23:54:39,924 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:42,638 - Bad Request: /api/update_routing/
+2025-02-07 23:54:44,963 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:47,969 - Bad Request: /api/update_routing/
+2025-02-07 23:54:49,913 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:53,302 - Bad Request: /api/update_routing/
+2025-02-07 23:54:54,978 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:54:58,616 - Bad Request: /api/update_routing/
+2025-02-07 23:55:03,934 - Bad Request: /api/update_routing/
+2025-02-07 23:55:08,931 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:55:09,230 - Bad Request: /api/update_routing/
+2025-02-07 23:55:09,591 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:55:14,553 - Bad Request: /api/update_routing/
+2025-02-07 23:55:14,934 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:55:20,002 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:55:20,132 - Bad Request: /api/update_routing/
+2025-02-07 23:55:24,931 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:55:25,515 - Bad Request: /api/update_routing/
+2025-02-07 23:55:29,936 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:55:30,798 - Bad Request: /api/update_routing/
+2025-02-07 23:55:34,932 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:55:37,103 - Bad Request: /api/update_routing/
+2025-02-07 23:55:39,961 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:55:42,720 - Bad Request: /api/update_routing/
+2025-02-07 23:55:44,925 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:55:48,039 - Bad Request: /api/update_routing/
+2025-02-07 23:55:49,973 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:55:53,461 - Bad Request: /api/update_routing/
+2025-02-07 23:55:54,939 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:55:58,836 - Bad Request: /api/update_routing/
+2025-02-07 23:55:59,962 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:56:04,456 - Bad Request: /api/update_routing/
+2025-02-07 23:56:05,013 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:56:10,069 - Bad Request: /api/update_routing/
+2025-02-07 23:56:10,098 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:56:14,951 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:56:15,454 - Bad Request: /api/update_routing/
+2025-02-07 23:56:19,942 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:56:20,840 - Bad Request: /api/update_routing/
+2025-02-07 23:56:25,020 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:56:26,261 - Bad Request: /api/update_routing/
+2025-02-07 23:56:29,944 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:56:31,620 - Bad Request: /api/update_routing/
+2025-02-07 23:56:34,964 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:56:36,938 - Bad Request: /api/update_routing/
+2025-02-07 23:56:39,934 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:56:42,242 - Bad Request: /api/update_routing/
+2025-02-07 23:56:47,562 - Bad Request: /api/update_routing/
+2025-02-07 23:56:53,242 - Bad Request: /api/update_routing/
+2025-02-07 23:56:53,962 - C:\Users\Hp\major_project\main_project\views.py changed, reloading.
+2025-02-07 23:56:56,218 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Contains network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:56:58,505 - Bad Request: /api/update_routing/
+2025-02-07 23:57:03,790 - Bad Request: /api/update_routing/
+2025-02-07 23:57:07,955 - C:\Users\Hp\major_project\main_project\views.py changed, reloading.
+2025-02-07 23:57:10,636 - Bad Request: /api/update_routing/
+2025-02-07 23:57:13,707 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:57:14,740 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:57:16,001 - Bad Request: /api/update_routing/
+2025-02-07 23:57:19,784 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:57:21,324 - Bad Request: /api/update_routing/
+2025-02-07 23:57:24,754 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:57:26,689 - Bad Request: /api/update_routing/
+2025-02-07 23:57:31,554 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:57:31,965 - Bad Request: /api/update_routing/
+2025-02-07 23:57:34,735 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:57:37,279 - Bad Request: /api/update_routing/
+2025-02-07 23:57:39,927 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:57:42,594 - Bad Request: /api/update_routing/
+2025-02-07 23:57:44,930 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:57:48,171 - Bad Request: /api/update_routing/
+2025-02-07 23:57:49,923 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:57:53,543 - Bad Request: /api/update_routing/
+2025-02-07 23:57:54,929 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:57:58,917 - Bad Request: /api/update_routing/
+2025-02-07 23:57:59,953 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:58:04,523 - Bad Request: /api/update_routing/
+2025-02-07 23:58:04,944 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:58:09,975 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:58:10,308 - Bad Request: /api/update_routing/
+2025-02-07 23:58:14,924 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:58:15,613 - Bad Request: /api/update_routing/
+2025-02-07 23:58:19,928 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:58:20,917 - Bad Request: /api/update_routing/
+2025-02-07 23:58:24,944 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:58:26,204 - Bad Request: /api/update_routing/
+2025-02-07 23:58:29,916 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:58:31,543 - Bad Request: /api/update_routing/
+2025-02-07 23:58:34,958 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:58:36,909 - Bad Request: /api/update_routing/
+2025-02-07 23:58:42,252 - Bad Request: /api/update_routing/
+2025-02-07 23:58:47,826 - Bad Request: /api/update_routing/
+2025-02-07 23:58:48,125 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:58:49,737 - Internal Server Error: /api/network/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 129, in get_network_topology
+    "graph": latest_decision.graph  # Retrieve network topology
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RoutingDecision' object has no attribute 'graph'
+2025-02-07 23:58:53,185 - Bad Request: /api/update_routing/
+2025-02-07 23:58:58,702 - Bad Request: /api/update_routing/
+2025-02-07 23:59:04,110 - Bad Request: /api/update_routing/
+2025-02-07 23:59:09,483 - Bad Request: /api/update_routing/
+2025-02-07 23:59:14,994 - Bad Request: /api/update_routing/
+2025-02-07 23:59:20,387 - Bad Request: /api/update_routing/
+2025-02-07 23:59:25,905 - Bad Request: /api/update_routing/
+2025-02-07 23:59:31,210 - Bad Request: /api/update_routing/
+2025-02-07 23:59:36,893 - Bad Request: /api/update_routing/
+2025-02-07 23:59:42,385 - Bad Request: /api/update_routing/
+2025-02-07 23:59:47,945 - Bad Request: /api/update_routing/
+2025-02-07 23:59:53,390 - Bad Request: /api/update_routing/
+2025-02-07 23:59:58,840 - Bad Request: /api/update_routing/
+2025-02-08 00:02:19,364 - Not Found: /api/network/
+2025-02-08 00:02:24,888 - Not Found: /api/network/
+2025-02-08 00:02:29,914 - Not Found: /api/network/
+2025-02-08 00:02:34,906 - Not Found: /api/network/
+2025-02-08 00:02:39,889 - Not Found: /api/network/
+2025-02-08 00:02:44,905 - Not Found: /api/network/
+2025-02-08 00:02:49,979 - Not Found: /api/network/
+2025-02-08 00:02:54,896 - Not Found: /api/network/
+2025-02-08 00:03:00,128 - Not Found: /api/network/
+2025-02-08 00:03:04,898 - Not Found: /api/network/
+2025-02-08 00:03:09,896 - Not Found: /api/network/
+2025-02-08 00:03:14,905 - Not Found: /api/network/
+2025-02-08 00:03:19,898 - Not Found: /api/network/
+2025-02-08 00:03:24,896 - Not Found: /api/network/
+2025-02-08 00:03:34,673 - Not Found: /api/network/
+2025-02-08 00:03:39,890 - Not Found: /api/network/
+2025-02-08 00:03:44,359 - Not Found: /api/network/
+2025-02-08 00:04:01,911 - Not Found: /api/snn_settings/
+2025-02-12 00:03:39,191 - Internal Server Error: /api/snn_settings/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 65, in get_snn_settings
+    "learning_rate": settings.learning_rate,
+                     ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SNNSettings' object has no attribute 'learning_rate'. Did you mean: 'firing_rate'?
+2025-02-12 00:11:02,451 - C:\Users\Hp\major_project\main_project\views.py changed, reloading.
+2025-02-12 00:11:22,731 - C:\Users\Hp\major_project\main_project\models.py changed, reloading.
+2025-02-12 00:13:03,694 - C:\Users\Hp\major_project\main_project\views.py changed, reloading.
+2025-02-12 00:13:51,198 - Not Found: /room/
+2025-02-12 00:21:31,353 - Bad Request: /api/update_status/
+2025-02-12 00:23:06,285 - Bad Request: /api/update_status/
+2025-02-12 00:26:06,676 - Bad Request: /api/update_status/
+2025-02-12 00:29:02,965 - Bad Request: /api/update_status/
+2025-02-12 19:56:04,932 - Not Found: /favicon.ico
+2025-02-12 19:56:40,894 - Not Found: /room/
+2025-02-12 23:24:26,070 - C:\Users\Hp\major_project\main_project\urls.py changed, reloading.
+2025-02-12 23:25:16,692 - Not Found: /lights/
+2025-02-12 23:31:29,104 - C:\Users\Hp\major_project\main_project\views.py changed, reloading.
+2025-02-12 23:31:44,126 - C:\Users\Hp\major_project\main_project\urls.py changed, reloading.
+2025-02-12 23:32:18,907 - C:\Users\Hp\major_project\main_project\views.py changed, reloading.
+2025-02-12 23:32:22,856 - Method Not Allowed: /api/update_status/
+2025-02-12 23:33:22,604 - Method Not Allowed: /api/update_status/
+2025-02-12 23:33:24,696 - C:\Users\Hp\major_project\main_project\views.py changed, reloading.
+2025-02-12 23:34:22,592 - Method Not Allowed: /api/update_status/
+2025-02-12 23:34:45,010 - C:\Users\Hp\major_project\main_project\urls.py changed, reloading.
+2025-02-12 23:35:18,993 - Method Not Allowed: /api/update_status/
+2025-02-12 23:35:21,590 - Method Not Allowed: /api/update_status/
+2025-02-12 23:35:26,583 - Method Not Allowed: /api/update_status/
+2025-02-12 23:35:31,592 - Method Not Allowed: /api/update_status/
+2025-02-12 23:35:36,599 - Method Not Allowed: /api/update_status/
+2025-02-12 23:35:41,588 - Method Not Allowed: /api/update_status/
+2025-02-12 23:35:46,589 - Method Not Allowed: /api/update_status/
+2025-02-12 23:35:51,596 - Method Not Allowed: /api/update_status/
+2025-02-12 23:35:56,595 - Method Not Allowed: /api/update_status/
+2025-02-12 23:36:01,580 - Method Not Allowed: /api/update_status/
+2025-02-12 23:36:06,583 - Method Not Allowed: /api/update_status/
+2025-02-12 23:36:11,629 - Method Not Allowed: /api/update_status/
+2025-02-12 23:36:16,589 - Method Not Allowed: /api/update_status/
+2025-02-12 23:36:22,604 - Method Not Allowed: /api/update_status/
+2025-02-12 23:37:22,668 - Method Not Allowed: /api/update_status/
+2025-02-12 23:38:22,598 - Method Not Allowed: /api/update_status/
+2025-02-12 23:39:22,613 - Method Not Allowed: /api/update_status/
+2025-02-12 23:40:22,591 - Method Not Allowed: /api/update_status/
+2025-02-12 23:41:22,599 - Method Not Allowed: /api/update_status/
+2025-02-12 23:42:22,584 - Method Not Allowed: /api/update_status/
+2025-02-12 23:43:22,599 - Method Not Allowed: /api/update_status/
+2025-02-12 23:44:22,601 - Method Not Allowed: /api/update_status/
+2025-02-12 23:45:22,610 - Method Not Allowed: /api/update_status/
+2025-02-12 23:46:22,594 - Method Not Allowed: /api/update_status/
+2025-02-12 23:47:22,587 - Method Not Allowed: /api/update_status/
+2025-02-12 23:48:22,603 - Method Not Allowed: /api/update_status/
+2025-02-12 23:48:47,412 - Method Not Allowed: /api/update_status/
+2025-02-12 23:48:51,584 - Method Not Allowed: /api/update_status/
+2025-02-13 19:56:18,257 - Internal Server Error: /api/snn_settings/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: main_project_snnsettings.simulation_time
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 84, in get_snn_settings
+    settings = SNNSettings.objects.first()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 1097, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: main_project_snnsettings.simulation_time
+2025-02-13 19:56:20,365 - Internal Server Error: /api/snn_settings/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: main_project_snnsettings.simulation_time
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 84, in get_snn_settings
+    settings = SNNSettings.objects.first()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 1097, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: main_project_snnsettings.simulation_time
+2025-02-13 19:56:24,586 - Internal Server Error: /api/snn_settings/
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: main_project_snnsettings.simulation_time
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\main_project\views.py", line 84, in get_snn_settings
+    settings = SNNSettings.objects.first()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 1097, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_proj_venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: main_project_snnsettings.simulation_time
+2025-02-13 19:58:17,087 - Not Found: /api/snn_settings/
+2025-02-13 19:58:19,093 - Not Found: /api/snn_settings/
+2025-02-13 19:58:23,117 - Not Found: /api/snn_settings/
+2025-02-13 19:58:38,108 - Not Found: /api/create_log_entry/
+2025-02-13 19:58:39,278 - Not Found: /api/create_log_entry/
+2025-02-13 20:00:05,802 - Not Found: /api/snn_settings/
+2025-02-13 20:00:07,817 - Not Found: /api/snn_settings/
+2025-02-13 20:00:11,843 - Not Found: /api/snn_settings/
+2025-02-13 20:00:29,862 - Internal Server Error: /api/update_routing/
+2025-02-13 20:00:35,660 - Internal Server Error: /api/update_routing/
+2025-02-13 20:00:41,120 - Internal Server Error: /api/update_routing/
+2025-02-13 20:00:46,579 - Internal Server Error: /api/update_routing/
+2025-02-13 20:00:52,033 - Internal Server Error: /api/update_routing/
+2025-02-13 20:00:57,486 - Internal Server Error: /api/update_routing/
+2025-02-13 20:01:02,981 - Internal Server Error: /api/update_routing/
+2025-02-13 20:01:08,463 - Internal Server Error: /api/update_routing/
+2025-02-13 20:01:14,379 - Internal Server Error: /api/update_routing/
+2025-02-13 20:01:19,925 - Internal Server Error: /api/update_routing/
+2025-02-13 20:01:23,167 - C:\Users\Hp\major_project\main_project\models.py changed, reloading.
+2025-02-13 20:01:25,582 - Internal Server Error: /api/update_routing/
