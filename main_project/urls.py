@@ -20,4 +20,7 @@ urlpatterns = [
 
     path('simulation-report/<int:simulation_id>/', views.view_simulation_report, name='simulation_report'),
 
+
+     path("upload-ipfs/", views.ipfs_upload_view, name="ipfs-upload"),
+
 ]
