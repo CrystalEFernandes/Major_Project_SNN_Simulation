@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Routing Protocol Comparison</title>
+    {% load static %}
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen font-['Inter']">
+    <div class="fixed top-4 left-4 z-10 p-10">
+        <a href="http://127.0.0.1:8000/dashboard/">
+        <button class="flex items-center space-x-2  from-gray-50 to-gray-100 px-4 py-2 rounded-lg  hover:bg-gray-50 transition-colors duration-200  border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <i class="fas fa-bars text-gray-600"></i>
+            <span class="font-medium text-gray-700"> <- Home</span>
+            
+        </button>
+        </a>
+    </div>
+    <div class="py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-3 tracking-tight">Routing Protocol Comparison</h1>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Performance metrics analysis across different routing protocols</p>
+            </div>
+
+            <!-- Form Section -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 mb-8">
+                <div class="p-6" >
+                    <form method="POST" class="space-y-6">
+                        {% csrf_token %}
+                        
+                        <!-- Topology Type -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="topology_type" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Topology Type
+                                </label>
+                                <select id="topology_type" 
+                                        name="topology_type" 
+                                        required
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                                    <option value="">Select topology type</option>
+                                    <option value="MESH" {% if topology_type == 'MESH' %}selected{% endif %}>Mesh</option>
+                                    <option value="STAR" {% if topology_type == 'STAR' %}selected{% endif %}>Star</option>
+                                    <option value="TREE" {% if topology_type == 'TREE' %}selected{% endif %}>Tree</option>
+                                    <option value="RANDOM" {% if topology_type == 'RANDOM' %}selected{% endif %}>Random</option>
+                                </select>
+                            </div>
+
+                            <!-- Node Count -->
+                            <div>
+                                <label for="node_count" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Number of Nodes
+                                </label>
+                                <input type="number" 
+                                       id="node_count" 
+                                       name="node_count" 
+                                       min="2" 
+                                       max="100" 
+                                       value="{{ node_count|default:'' }}"
+                                       required
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                                       placeholder="Enter number (2-100)">
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="flex justify-center">
+                            <button type="submit" 
+                                    class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200">
+                                Run Simulation
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            {% if rows %}
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                <!-- Protocol Summary Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 bg-gray-50 border-b border-gray-200">
+                    {% for protocol in protocols %}
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ protocol }}</h3>
+                        <p class="text-sm text-gray-500">Routing Protocol</p>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr class="bg-gray-50">
+                                <th scope="col" class="px-6 py-5 text-left text-sm font-semibold text-gray-900 tracking-wider">
+                                    Metrics
+                                </th>
+                                {% for protocol in protocols %}
+                                    <th scope="col" class="px-6 py-5 text-center text-sm font-semibold text-gray-900 tracking-wider">
+                                        {{ protocol }}
+                                    </th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            {% for row in rows %}
+                                <tr class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                                        {{ row.metric }}
+                                    </td>
+                                    {% for val in row.values %}
+                                        <td class="px-6 py-4 text-right">
+                                            <div class="flex items-center justify-end space-x-1">
+                                                <span class="font-mono text-sm text-gray-700">
+                                                    {{ val.value|floatformat:val.decimals }}
+                                                </span>
+                                                {% if val.unit %}
+                                                    <span class="text-xs text-gray-400 font-medium">{{ val.unit }}</span>
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Footer -->
+            <div class="mt-8 text-center">
+                <p class="text-sm text-gray-500">
+                    <span class="font-medium">Last Updated:</span> 
+                    <span class="text-gray-400">{% now "F j, Y" %}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const form = document.querySelector('form');
+          if (form) {
+            form.addEventListener('submit', () => {
+              // Show loading state
+              const submitButton = form.querySelector('button[type="submit"]');
+              if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.innerHTML = `
+                  <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Processing...
+                `;
+              }
+            });
+          }
+        });
+      </script>
+</body>
+</html>

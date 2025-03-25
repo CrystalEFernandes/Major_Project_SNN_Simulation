@@ -1,0 +1,127 @@
+
+
+
+{% extends 'test.html' %}
+{% block contents %}
+<div class="container">
+    <head>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap Icons -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+       
+    </head>
+    <style>
+        body {
+            background-color: #809aee;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .upload-container {
+            max-width: 600px;
+            margin: 5rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .upload-icon {
+            font-size: 2.5rem;
+            color: #6c63ff;
+            margin-bottom: 1rem;
+        }
+        .custom-file-input {
+            position: relative;
+            padding: 2rem;
+            border: 2px dashed #dee2e6;
+            border-radius: 6px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+        .custom-file-input:hover {
+            border-color: #6c63ff;
+        }
+        .custom-file-input input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .btnbtn {
+            background-color: #6c63ff;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-upload:hover {
+            background-color: #5a52d5;
+            transform: translateY(-2px);
+        }
+        .logo {
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        .logo span {
+            color: #6c63ff;
+        }
+    </style>
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+
+    <div class="page-heading">
+        <h3>Upload Data to IPFS </h3>
+    </div>
+    <div class="upload-container">
+        <h2 class="logo text-center">IPFS<span>Upload</span></h2>
+        
+        <div class="text-center mb-4">
+            <i class="bi bi-cloud-arrow-up upload-icon"></i>
+            <h4 class="mb-3">Upload to IPFS</h4>
+            <p class="text-muted">Securely store your files on the decentralized web</p>
+        </div>
+
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error }}
+        </div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="custom-file-input">
+                <i class="bi bi-file-earmark-plus mb-2" style="font-size: 1.5rem;"></i>
+                <p class="mb-1">Drag and drop a file here or click to browse</p>
+                <small class="text-muted" id="file-name">No file selected</small>
+                <input type="file" name="file" id="file-input" required>
+            </div>
+            
+            <div class="d-grid">
+                <button type="submit" class="btn btnbtn btn-lg  ">
+                    <i class="bi bi-arrow-up-circle-fill me-2"></i>Upload to IPFS
+                </button>
+            </div>
+        </form>
+    </div>
+
+    
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Display selected filename
+    document.getElementById('file-input').addEventListener('change', function(e) {
+        const fileName = e.target.files[0] ? e.target.files[0].name : 'No file selected';
+        document.getElementById('file-name').textContent = fileName;
+    });
+</script>
+{% endblock %}

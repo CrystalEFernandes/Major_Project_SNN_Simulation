@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -516,3 +516,38 @@ def view_simulation_report(request, simulation_id):
         'report_text': report_text,
     }
     return render(request, 'main_project/simulation_report.html', context)
+
+
+import requests
+from django.shortcuts import render
+from django.http import JsonResponse
+from django.conf import settings
+
+PINATA_API_KEY = "897bc0dbc9c242fe0c35"
+PINATA_SECRET_API_KEY = "0c7ce37e46f40b32b70eee0f85ffcb43af2704dcb2af60e88d3d81e70c9fb436"
+PINATA_URL = "https://api.pinata.cloud/pinning/pinFileToIPFS"
+
+def upload_to_pinata(file):
+    headers = {
+        "pinata_api_key": PINATA_API_KEY,
+        "pinata_secret_api_key": PINATA_SECRET_API_KEY,
+    }
+    files = {
+        "file": (file.name, file.read())
+    }
+    response = requests.post(PINATA_URL, files=files, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"error": response.text}
+
+def ipfs_upload_view(request):
+    if request.method == "POST":
+        uploaded_file = request.FILES.get("file")
+        if uploaded_file:
+            result = upload_to_pinata(uploaded_file)
+            return render(request, "main_project/upload_result.html", {"result": result})
+        else:
+            return render(request, "main_project/upload_form.html", {"error": "No file uploaded."})
+    return render(request, "main_project/upload_form.html")
