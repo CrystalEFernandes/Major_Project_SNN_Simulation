@@ -1,0 +1,120 @@
+2025-03-31 15:27:45,965 - INFO - MainThread - --- Starting SNN Simulation ---
+2025-03-31 15:27:45,966 - INFO - MainThread - Attempting to fetch SNN settings from http://127.0.0.1:8000/api/snn_settings/
+2025-03-31 15:27:45,977 - INFO - MainThread - Successfully fetched SNN settings: {'learning_rate': 0.01, 'synaptic_weight': 0.005, 'firing_threshold': -54.0, 'reset_potential': -65.0, 'tau_pre': 20.0, 'tau_post': 20.0, 'simulation_time': 100.0}
+2025-03-31 15:27:45,977 - INFO - MainThread - Using merged settings (Defaults + API): {
+  "learning_rate": 0.01,
+  "synaptic_weight": 0.005,
+  "firing_threshold": -54.0,
+  "reset_potential": -65.0,
+  "tau_pre": 20.0,
+  "tau_post": 20.0,
+  "simulation_time": 100.0,
+  "routing_update_interval": 5.0,
+  "network_size": 5,
+  "input_firing_rate": 50.0,
+  "gmax": 0.01,
+  "adaptive_threshold_tau": 100.0,
+  "adaptive_threshold_increment": 2.0,
+  "neuron_refractory_period": 2.0,
+  "energy_consumption_per_spike": 0.01,
+  "energy_recovery_rate": 0.02,
+  "max_energy_level": 10.0,
+  "congestion_increase_per_spike": 0.005,
+  "congestion_decay_rate": 0.015,
+  "max_congestion_level": 1.0,
+  "hetero_threshold_range": 5.0,
+  "hetero_energy_profile_mix": [
+    0.4,
+    0.3,
+    0.3
+  ],
+  "hetero_congestion_decay_range": 0.005,
+  "hetero_input_rate_range": 10.0
+}
+2025-03-31 15:27:45,984 - INFO - MainThread - Using SNN settings: N=5
+2025-03-31 15:27:45,985 - INFO - MainThread - Setting up SNN network with potential heterogeneity...
+2025-03-31 15:27:46,130 - INFO - MainThread - SNN network setup complete.
+2025-03-31 15:27:46,132 - INFO - MainThread - Simulation step duration: 100. s
+2025-03-31 15:27:46,133 - INFO - MainThread - Routing update interval: 5.0 seconds
+2025-03-31 15:27:46,134 - INFO - MainThread - Heterogeneous Energy Params: Max=[ 8. 15. 10. 15. 10.], Cons=[0.007 0.012 0.01  0.012 0.01 ], Rec=[0.018 0.022 0.02  0.022 0.02 ]
+2025-03-31 15:27:46,135 - INFO - MainThread - Heterogeneous Congestion Params: Incr=[0.005 0.005 0.005 0.005 0.005], Decay=[0.0155 0.0194 0.0138 0.015  0.0182], Max=[1. 1. 1. 1. 1.]
+2025-03-31 15:27:46,135 - INFO - MainThread - 
+--- Simulation Cycle 1 ---
+2025-03-31 15:27:46,137 - INFO - MainThread - Running Brian2 simulation for 100. s...
+2025-03-31 15:31:29,282 - INFO - MainThread - Brian2 run finished in 223.15 seconds.
+2025-03-31 15:31:29,284 - INFO - MainThread - Analyzing activity and calculating metrics...
+2025-03-31 15:31:29,287 - INFO - MainThread - Network Status: Nodes=5, Active(last step)=4, Pkts(last step)=2665, AvgLat(overall)=850.55ms, AvgEnergy=7.62, AvgCongestion=0.632
+2025-03-31 15:31:29,287 - INFO - MainThread - Calculating routing paths from 0 to 4...
+2025-03-31 15:31:29,288 - ERROR - MainThread - An unexpected error occurred in run_simulation: name 'settings' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Hp\major_project\scripts\snn_simulation.py", line 844, in run_simulation
+    dynamic_graph = create_dynamic_graph(S, N, spike_analysis, neuron_congestion_levels, latencies_ms)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\major_project\scripts\snn_simulation.py", line 553, in create_dynamic_graph
+    congestion_penalty = 1.0 + 2.0 * (dest_congestion / (settings["max_congestion_level"] + 1e-6))**2 # Quadratic increase
+                                                         ^^^^^^^^
+NameError: name 'settings' is not defined
+2025-03-31 15:31:29,291 - INFO - MainThread - --- Simulation Ended ---
+2025-03-31 15:34:45,548 - INFO - MainThread - --- Starting SNN Simulation ---
+2025-03-31 15:34:45,549 - INFO - MainThread - Attempting to fetch SNN settings from http://127.0.0.1:8000/api/snn_settings/
+2025-03-31 15:34:45,564 - INFO - MainThread - Successfully fetched SNN settings: {'learning_rate': 0.01, 'synaptic_weight': 0.005, 'firing_threshold': -54.0, 'reset_potential': -65.0, 'tau_pre': 20.0, 'tau_post': 20.0, 'simulation_time': 100.0}
+2025-03-31 15:34:45,565 - INFO - MainThread - Using merged settings (Defaults + API): {
+  "learning_rate": 0.01,
+  "synaptic_weight": 0.005,
+  "firing_threshold": -54.0,
+  "reset_potential": -65.0,
+  "tau_pre": 20.0,
+  "tau_post": 20.0,
+  "simulation_time": 100.0,
+  "routing_update_interval": 5.0,
+  "network_size": 5,
+  "input_firing_rate": 50.0,
+  "gmax": 0.01,
+  "adaptive_threshold_tau": 100.0,
+  "adaptive_threshold_increment": 2.0,
+  "neuron_refractory_period": 2.0,
+  "energy_consumption_per_spike": 0.01,
+  "energy_recovery_rate": 0.02,
+  "max_energy_level": 10.0,
+  "congestion_increase_per_spike": 0.005,
+  "congestion_decay_rate": 0.015,
+  "max_congestion_level": 1.0,
+  "hetero_threshold_range": 5.0,
+  "hetero_energy_profile_mix": [
+    0.4,
+    0.3,
+    0.3
+  ],
+  "hetero_congestion_decay_range": 0.005,
+  "hetero_input_rate_range": 10.0
+}
+2025-03-31 15:34:45,571 - INFO - MainThread - Using SNN settings: N=5
+2025-03-31 15:34:45,572 - INFO - MainThread - Setting up SNN network with potential heterogeneity...
+2025-03-31 15:34:45,770 - INFO - MainThread - SNN network setup complete.
+2025-03-31 15:34:45,771 - INFO - MainThread - Simulation step duration: 100. s
+2025-03-31 15:34:45,771 - INFO - MainThread - Routing update interval: 5.0 seconds
+2025-03-31 15:34:45,772 - INFO - MainThread - Heterogeneous Energy Params: Max=[15. 10. 10.  8. 15.], Cons=[0.012 0.01  0.01  0.007 0.012], Rec=[0.022 0.02  0.02  0.018 0.022]
+2025-03-31 15:34:45,773 - INFO - MainThread - Heterogeneous Congestion Params: Incr=[0.005 0.005 0.005 0.005 0.005], Decay=[0.0141 0.015  0.0152 0.0175 0.0168], Max=[1. 1. 1. 1. 1.]
+2025-03-31 15:34:45,774 - INFO - MainThread - 
+--- Simulation Cycle 1 ---
+2025-03-31 15:34:45,775 - INFO - MainThread - Running Brian2 simulation for 100. s...
+2025-03-31 15:37:05,934 - INFO - MainThread - Brian2 run finished in 140.16 seconds.
+2025-03-31 15:37:05,936 - INFO - MainThread - Analyzing activity and calculating metrics...
+2025-03-31 15:37:05,938 - INFO - MainThread - Network Status: Nodes=5, Active(last step)=2, Pkts(last step)=872, AvgLat(overall)=1962.30ms, AvgEnergy=10.67, AvgCongestion=0.400
+2025-03-31 15:37:05,938 - INFO - MainThread - Calculating routing paths from 0 to 4...
+2025-03-31 15:37:05,939 - INFO - MainThread - Running Dijkstra algorithm...
+2025-03-31 15:37:05,940 - INFO - MainThread - Dijkstra Path Found: [0, 4] (Cost: 1.0645)
+2025-03-31 15:37:05,941 - INFO - MainThread - Running Heuristic Best-First Search...
+2025-03-31 15:37:05,942 - INFO - MainThread - Heuristic Search: Found path [0, 1, 2, 4] with average node score 0.430
+2025-03-31 15:37:05,943 - INFO - MainThread - Heuristic Path Found: [0, 1, 2, 4] (Avg Node Score: 0.430)
+2025-03-31 15:37:05,944 - INFO - MainThread - Analysis and routing calculations finished in 0.01 seconds.
+2025-03-31 15:37:05,945 - INFO - MainThread - Preparing simulation data payload for API...
+2025-03-31 15:37:05,948 - INFO - MainThread - Sending detailed simulation data to API...
+2025-03-31 15:37:06,023 - INFO - MainThread - Successfully sent simulation data. Response: 201
+2025-03-31 15:37:06,024 - INFO - MainThread - API communication finished in 0.08 seconds.
+2025-03-31 15:37:06,024 - INFO - MainThread - Waiting for 0.00 seconds...
+2025-03-31 15:37:06,025 - INFO - MainThread - 
+--- Simulation Cycle 2 ---
+2025-03-31 15:37:06,026 - INFO - MainThread - Running Brian2 simulation for 100. s...
+2025-03-31 15:38:03,750 - INFO - MainThread - Simulation stopped by user (KeyboardInterrupt).
+2025-03-31 15:38:03,751 - INFO - MainThread - --- Simulation Ended ---

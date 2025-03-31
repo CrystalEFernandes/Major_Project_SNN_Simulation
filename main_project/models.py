@@ -30,6 +30,7 @@ class NetworkStatus(models.Model):
     total_packets = models.IntegerField()
     avg_latency = models.FloatField()
     avg_energy = models.FloatField()
+    avg_congestion = models.FloatField(default=0.0)
 
     def __str__(self):
         return f"Network Status - {self.timestamp}"

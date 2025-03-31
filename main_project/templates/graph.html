@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNN Visualization - Sim {{ simulation_data_point_pk }}</title>
+
+    <link rel="shortcut icon" href="{% static 'assets/compiled/svg/favicon.svg' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAiCAYAAADRcLDBAAAEs2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS41LjAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9RZXNvdXJjZUV2ZW50IyIKICAgZXhpZjpQaXhlbFhEaW1lbnNpb249IjMzIgogICBleGlmOlBheGVsWURpbWVuc2lvbj0iMzQiCiAgIGV4aWY6Q29sb3JTcGFjZT0iMSIKICAgdGlmZjpJbWFnZVdpZHRhPSIzMyIKICAgdGlmZjpJbWFnZUxlbmd0aD0iMzQiCiAgIHRpZmY6UmVzb2x1dGlvblVuaXQ9IjIiCiAgIHRpZmY6WFJlc29sdXRpb249Ijk2LjAiCiAgIHRpZmY6WVJlc29sdXRpb249Ijk2LjAiCiAgIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiCiAgIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIKICAgeG1wOk1vZGlmeURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiCiAgIHhtcDpNZXRhZGF0YURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJwcm9kdWNlZCIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iAWZmaW5pdHkgRGVzaWduZXIgMS4xMC4xIgogICAgICBzdEV2dDp3aGVuPSIyMDIyLTAzLTMxVDEwOjUwOjIzKzAyOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cjw/eHBhY2tldCBlbmQ9InIiPz5V57uAAAABgmlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kc8rRFEUxz9maORHo1hYKC9hISNGTWwsRn4VFmOUX5uZZ36oeTOv954kW2WrKLHxa8FfwFZZK0WkZClrYoOe87ypmWTO7dzzud97z+nec8ETzaiaWd4NWtYyIiNhZWZ2TvE946WZSjqoj6mmPjE1HKWkfdxR5sSbgFOr9Ll/rXoxYapQVik8oOqGJTwqPL5i6Q5vCzeo6dii8KlwpyEXFL519LjLLw6nXP5y2IhGBsFTJ6ykijhexGra0ITl5bRqmWU1fx/nJTWJ7PSUxBbxJkwijBBGYYwhBgnRQ7/MIQIE6ZIVJfK7f/MnyUmuKrPOKgZLpEhj0SnqslRPSEyKnpCRYdXp/9++msneoFu9JgwVT7b91ga+LfjetO3PQ9v+PgLvI1xkC/m5A+h7F32zoLXug38dzi4LWnwHzjeg8UGPGbFfySvuSSbh9QRqZ6H+Gqrm3Z7l9zm+h+iafNUV7O5Bu5z3L/wAdthn7QIme0YAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAJTSURBVFiF7Zi9axRBGIefEw2IdxFBRQsLWUTBaywSK4ubdSGVIY1Y6HZql8ZKCGIqwX/AYLmCgVQKfiDn7jZeEQMWfsSAHAiKqPiB5mIgELWYOW5vzc3O7niHhT/YZvY37/swM/vOzJbIqVq9uQ04CYwCI8AhYAlYAB4Dc7HnrOSJWcoJcBS4ARzQ2F4BZ2LPmTeNuykHwEWgkQGAet9QfiMZjUSt3hwD7psGTWgs9pwH1hC1enMYeA7sKwDxBqjGnvNdZzKZjqmCAKh+U1kmEwi3IEBbIsugnY5avTkEtIAtFhBrQCX2nLVehqyRqFoCAAwBh3WGLAhbgCRIYYinwLolwLqKUwwi9pxV4KUlxKKKUwxC6ZElRCPLYAJxGfhSEOCz6m8HEXvOB2CyIMSk6m8HoXQTmMkJcA2YNTHm3congOvATo3tE3A29pxbpnFzQSiQPcB55IFmFNgFfEQeahaAGZMpsIJIAZWAHcDX2HN+2cT6r39GxmvC9aPNwH5gO1BOPFuBVWAZue0vA9+A12EgjPadnhCuH1WAE8ivYAQ4ohKaagV4gvxi5oG7YSA2vApsCOH60WngKrA3R9IsvQUuhIGY00K4flQG7gHH/mLytB4C42EgfrQb0mV7us8AAMeBS8mGNMR4nwHamtBB7B4QRNdaS0M8GxDEog7iyoAguvJ0QYSBuAOcAt71Kfl7wA8DcTvZ2KtOlJEr+ByyQtqqhTyHTIeB+ONeqi3brh+VgIN0fohUgWGggizZFTplu12yW8iy/YLOGWMpDMTPXnl+Az9vj2HERYqPAAAAAElFTkSuQmCC" type="image/png">
+
+    <link rel="stylesheet" href="{% static 'assets/compiled/css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/compiled/css/app-dark.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/compiled/css/iconly.css' %}">
+
+    <style>
+        /* Minimal CSS Variables needed for charts/graph elements */
+        :root {
+            --node-color: #e94560; /* Base node color */
+            --node-stroke: #f5f5f5;
+            --link-color: #50507b;
+            --heuristic-color: #f9a826;
+            --congestion-low: #5ddc73;
+            --congestion-medium: #f7b731;
+            --congestion-high: #e94560;
+            --congestion-low-color: #2ecc71;  /* Green */
+            --congestion-mid-color: #f1c40f;  /* Yellow */
+            --congestion-high-color: #e74c3c; /* Red */
+            --chart-bar-energy: #3498db;     /* Blue for Energy */
+            --chart-bar-congestion: #e74c3c; /* Red for Congestion */
+            --chart-bar-rate: #f39c12;      /* Orange for Firing Rate */
+            --chart-bar-score: #9b59b6;     /* Purple for Score */
+            --chart-bg: rgba(255, 255, 255, 0.05); /* Use Mazer's dark bg variable if available, else fallback */
+            --chart-axis-color: #aaa;
+        }
+        /* Selectors needed for graph styling */
+        #network-graph { display: block; max-width: 100%; max-height: 100%; }
+        .node circle { stroke: var(--node-stroke); stroke-width: 1.5px; cursor: pointer; transition: fill 0.3s ease, r 0.3s ease, stroke 0.2s ease; filter: drop-shadow(0px 0px 3px rgba(255, 255, 255, 0.3)); }
+        .node text { fill: #ffffff; font-family: var(--bs-font-sans-serif); font-size: 12px; text-anchor: middle; dominant-baseline: central; pointer-events: none; filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.7)); }
+        .node.selected circle { stroke: var(--bs-primary); stroke-width: 3px; } /* Use Mazer's primary color */
+        .link { stroke-opacity: 0.6; stroke-width: 1.5px; transition: stroke 0.3s ease, stroke-width 0.3s ease, stroke-opacity 0.3s ease; }
+        .link.potential { stroke: var(--link-color); stroke-dasharray: 3 3; }
+        .link.heuristic-path { stroke: var(--heuristic-color); filter: drop-shadow(0px 0px 4px var(--heuristic-color)); stroke-width: 4px; } /* Increased width */
+
+        /* Styles for Legend color squares */
+        .legend-color { display: inline-block; width: 15px; height: 15px; border-radius: 50%; margin-right: 8px; border: 1px solid rgba(255, 255, 255, 0.3); flex-shrink: 0; vertical-align: middle;}
+        .legend-color.congestion-low { background-color: var(--congestion-low); }
+        .legend-color.congestion-medium { background-color: var(--congestion-medium); }
+        .legend-color.congestion-high { background-color: var(--congestion-high); }
+
+        /* Styles for node info details */
+         #node-details { background-color: rgba(0, 0, 0, 0.2); border: 1px solid var(--bs-border-color); padding: 10px; font-size: 0.8em; font-family: var(--bs-font-monospace); white-space: pre-wrap; word-wrap: break-word; color: var(--bs-body-color); border-radius: var(--bs-border-radius); display: none; margin-top: 5px; }
+
+        /* Styles for Mini Charts */
+        .mini-chart-container { margin-top: 15px; padding-top: 10px; border-top: 1px solid var(--bs-border-color); }
+        .mini-chart { margin-bottom: 10px; font-size: 0.8em; }
+        .mini-chart .chart-label { display: block; margin-bottom: 3px; color: var(--bs-secondary-color); }
+        .mini-chart .chart-bar-bg { height: 12px; background-color: var(--chart-bg); border-radius: 3px; overflow: hidden; width: 100%; }
+        .mini-chart .chart-bar { height: 100%; background-color: var(--chart-bar-score); border-radius: 3px; transition: width 0.3s ease-in-out; text-align: right; padding-right: 4px; color: white; font-size: 0.9em; line-height: 12px; box-sizing: border-box; white-space: nowrap; }
+        .mini-chart .chart-bar.energy { background-color: var(--chart-bar-energy); }
+        .mini-chart .chart-bar.congestion { background-color: var(--chart-bar-congestion); }
+        .mini-chart .chart-bar.rate { background-color: var(--chart-bar-rate); }
+
+        /* Styles for Global Histograms */
+        .histogram-container { margin-top: 15px; padding-top: 10px; border-top: 1px solid var(--bs-border-color); }
+        .histogram-chart svg { width: 100%; height: 80px; display: block; background-color: var(--chart-bg); border-radius: 4px; margin-top: 5px; }
+        .histogram-chart .hist-bar { fill: var(--chart-bar-score); shape-rendering: crispEdges; }
+        .histogram-chart .hist-bar.energy { fill: var(--chart-bar-energy); }
+        .histogram-chart .hist-bar.congestion { fill: var(--chart-bar-congestion); }
+        .histogram-chart .hist-bar.rate { fill: var(--chart-bar-rate); }
+        .histogram-chart .axis-label { font-size: 0.7em; fill: var(--bs-secondary-color); }
+        .histogram-chart .axis { stroke: var(--chart-axis-color); stroke-width: 1; }
+
+        /* Ensure main graph panel centers SVG and allows overflow */
+        .main-graph-panel { display: flex; justify-content: center; align-items: center; overflow: hidden; min-height: 450px; /* Adjust as needed */ padding: 5px; }
+
+        /* Ensure panel content scrolls if needed */
+        .card-body.scrollable { max-height: 70vh; /* Adjust as needed */ overflow-y: auto; }
+
+        /* Style for heuristic path text */
+         #heuristic-path-display { color: var(--heuristic-color); }
+
+    </style>
+</head>
+
+<body>
+    <script src="{% static 'assets/static/js/initTheme.js' %}"></script>
+    <div id="app">
+        <div id="sidebar">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header position-relative">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="logo">
+                            <a href="index.html"><img src="{% static 'assets/compiled/svg/logo.svg' %}" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                role="img" class="iconify iconify--system-uicons" width="20" height="20"
+                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
+                                        opacity=".3"></path>
+                                    <g transform="translate(-210 -1)">
+                                        <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
+                                        <circle cx="220.5" cy="11.5" r="4"></circle>
+                                        <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <div class="form-check form-switch fs-6">
+                                <input class="form-check-input  me-0" type="checkbox" id="toggle-dark" style="cursor: pointer">
+                                <label class="form-check-label"></label>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                role="img" class="iconify iconify--mdi" width="20" height="20" preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="sidebar-toggler x">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item">
+                            <a href="/dashboard/" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <!-- Mark Simulation List as active (adjust if needed) -->
+                        <li class="sidebar-item active">
+                            <a href="/simulation-data/" class='sidebar-link'>
+                                <i class="bi bi-card-list"></i>
+                                <span>Simulation List</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="/simulation-log/" class='sidebar-link'>
+                                <i class="bi-clock-history"></i>
+                                <span>Logs and History</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="/snn-control-panel/" class='sidebar-link'>
+                                <i class="bi-gear-fill"></i>
+                                <span>SNN Settiings</span>
+                            </a>
+                        </li>
+                         <li class="sidebar-item">
+                            <a href="/upload-ipfs/" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>IPFS Upload</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="/compare/" class='sidebar-link'>
+                                <i class="bi-clock-history"></i>
+                                <span>Comparision</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                 <!-- Updated Page Heading -->
+                <h3>SNN Routing Visualization</h3>
+                <p class="text-subtitle text-muted">Showing State for Simulation Record #{{ simulation_data_point_pk }}</p>
+            </div>
+            <div class="page-content">
+                <section class="section">
+                    <div class="row">
+                        <!-- Control Panel Column -->
+                        <div class="col-12 col-lg-3 col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Simulation State</h4>
+                                </div>
+                                <div class="card-body scrollable"> <!-- Added scrollable class -->
+                                    <div class="status-display">
+                                        <p>Source Node: <strong id="source-node">?</strong></p>
+                                        <p>Destination Node: <strong id="dest-node">?</strong></p>
+                                        <p>Timestamp: <span id="data-timestamp">?</span></p>
+                                    </div>
+                                    <div class="legend mt-4 pt-3 border-top">
+                                        <h5>Legend</h5>
+                                        <p><span class="legend-color congestion-low"></span> Low Congestion</p>
+                                        <p><span class="legend-color congestion-medium"></span> Medium Congestion</p>
+                                        <p><span class="legend-color congestion-high"></span> High Congestion</p>
+                                        <p class="mt-2">Node Size ~ Energy Level</p>
+                                        <p class="mt-3"><svg height="10" width="30" style="vertical-align: middle;"><line x1="0" y1="5" x2="30" y2="5" style="stroke:var(--link-color); stroke-width:1.5; stroke-dasharray: 3 3;" /></svg> Potential Link</p>
+                                        <p><svg height="10" width="30" style="vertical-align: middle;"><line x1="0" y1="5" x2="30" y2="5" style="stroke:var(--heuristic-color); stroke-width:4;" /></svg> Heuristic Path</p>
+                                    </div>
+                                    <!-- Global Histograms -->
+                                    <div class="histogram-container mt-4 pt-3 border-top">
+                                        <h5>Global Distributions</h5>
+                                        <div class="histogram-chart mb-2">
+                                            <span class="chart-label">Congestion Levels</span>
+                                            <svg id="svg-hist-congestion" viewBox="0 0 100 80" preserveAspectRatio="none"></svg>
+                                        </div>
+                                        <div class="histogram-chart mb-2">
+                                             <span class="chart-label">Energy Levels</span>
+                                             <svg id="svg-hist-energy" viewBox="0 0 100 80" preserveAspectRatio="none"></svg>
+                                        </div>
+                                         <div class="histogram-chart">
+                                             <span class="chart-label">Firing Rates (Hz)</span>
+                                             <svg id="svg-hist-rate" viewBox="0 0 100 80" preserveAspectRatio="none"></svg>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Graph Panel Column -->
+                        <div class="col-12 col-lg-6 col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Network Graph</h4>
+                                </div>
+                                <div class="card-body main-graph-panel"> <!-- Use specific class for flex/centering -->
+                                    <svg id="network-graph" preserveAspectRatio="xMidYMid meet" viewBox="0 0 600 500"></svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Info Panel Column -->
+                        <div class="col-12 col-lg-3 col-md-12"> <!-- Full width on medium for better layout stacking -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Information</h4>
+                                </div>
+                                <div class="card-body scrollable"> <!-- Added scrollable class -->
+                                    <div id="node-info">
+                                        <h5>Selected Node Info</h5>
+                                         <div id="node-info-content">
+                                            <p class="text-muted">Click on a node in the graph.</p>
+                                            <pre id="node-details"></pre>
+                                            <div id="node-charts-container" class="mini-chart-container" style="display: none;">
+                                                <h6>Node Metrics</h6>
+                                                <div id="chart-energy" class="mini-chart"></div>
+                                                <div id="chart-congestion" class="mini-chart"></div>
+                                                <div id="chart-rate" class="mini-chart"></div>
+                                                <div id="chart-score" class="mini-chart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="path-info" class="mt-4 pt-3 border-top">
+                                        <h5>Routing Paths</h5>
+                                        <p><strong>Heuristic:</strong> <span id="heuristic-path-display">N/A</span> (<span id="heuristic-score-display"></span>)</p>
+                                    </div>
+                                    <div id="explanation" class="mt-4 pt-3 border-top">
+                                        <h5>Explanation</h5>
+                                         <p>This visualization shows a snapshot of the SNN state for record <strong>#{{ simulation_data_point_pk }}</strong>.</p>
+                                         <ol style="padding-left: 1.2rem; font-size: 0.9em;">
+                                            <li class="mb-2">
+                                                <strong>SNN Model:</strong> Brian2 LIF neurons with:
+                                                <ul style="padding-left: 1rem; margin-top: 0.3rem;">
+                                                    <li>Adaptive Thresholds</li>
+                                                    <li>STDP Synapses</li>
+                                                    <li>Energy & Congestion tracking</li>
+                                                    <li>Poisson background input</li>
+                                                </ul>
+                                            </li>
+                                            <li class="mb-2">
+                                                <strong>Node State:</strong> Visuals show state at this timestamp:
+                                                <ul style="padding-left: 1rem; margin-top: 0.3rem;">
+                                                    <li><strong>Color:</strong> Congestion (Green: Low, Yellow: Med, Red: High)</li>
+                                                    <li><strong>Size:</strong> Energy Level (Larger = More)</li>
+                                                </ul>
+                                            </li>
+                                            <li class="mb-2">
+                                                <strong>Routing Paths:</strong> Calculated based on current state:
+                                                <ul style="padding-left: 1rem; margin-top: 0.3rem;">
+                                                    <li><strong>Heuristic Path</strong> (Yellow line): Best-first search guided by a composite score (latency, energy, congestion, rate) aiming for high average node score.</li>
+                                                </ul>
+                                            </li>
+                                             <li class="mb-2">
+                                                <strong>Node Details (On Click):</strong> Shows metrics at this timestamp:
+                                                <ul style="padding-left: 1rem; margin-top: 0.3rem;">
+                                                     <li>Raw metrics (Energy, Congestion, Rate, Latency)</li>
+                                                     <li>Composite Score & factor contributions</li>
+                                                 </ul>
+                                             </li>
+                                              <li class="mb-2">
+                                                <strong>Global Metrics:</strong> Histograms show network-wide distribution of Congestion, Energy, and Firing Rates.
+                                            </li>
+                                         </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2025 © SNN Simulator</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- JSON data script -->
+    {{ initial_simulation_data_json|json_script:"initial-data" }}
+
+    <!-- SNN Visualization JavaScript (Your original script block) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const svg = document.getElementById('network-graph');
+            const sourceNodeSpan = document.getElementById('source-node');
+            const destNodeSpan = document.getElementById('dest-node');
+            const dataTimestampSpan = document.getElementById('data-timestamp');
+            const nodeDetailsPre = document.getElementById('node-details');
+            // Use more specific selectors within the card structure if needed
+            const nodeInfoTitle = document.getElementById('node-info')?.querySelector('h5'); // Changed to h5
+            const nodeInfoDefaultText = document.getElementById('node-info-content')?.querySelector('p.text-muted'); // Target specific p tag
+            const heuristicPathSpan = document.getElementById('heuristic-path-display');
+            const heuristicScoreSpan = document.getElementById('heuristic-score-display');
+            const mainGraphPanel = document.querySelector('.main-graph-panel'); // Updated selector
+
+            // Chart elements
+            const nodeChartsContainer = document.getElementById('node-charts-container');
+            const chartEnergyDiv = document.getElementById('chart-energy');
+            const chartCongestionDiv = document.getElementById('chart-congestion');
+            const chartRateDiv = document.getElementById('chart-rate');
+            const chartScoreDiv = document.getElementById('chart-score');
+            const svgHistCongestion = document.getElementById('svg-hist-congestion');
+            const svgHistEnergy = document.getElementById('svg-hist-energy');
+            const svgHistRate = document.getElementById('svg-hist-rate');
+
+
+            // --- Constants ---
+            const BASE_RADIUS = 15;
+            const MAX_RADIUS_INCREASE = 10;
+            const SVG_VIEWBOX_WIDTH = 600;
+            const SVG_VIEWBOX_HEIGHT = 500;
+
+            // --- State Variables ---
+            let networkSize = 0;
+            let maxEnergy = 10.0;
+            let maxCongestion = 1.0;
+            let maxFiringRate = 1.0; // Initialize, will be recalculated
+            let nodesData = [];
+            let paths = {};
+            let selectedNodeId = null;
+            // SVG dimensions are handled by viewBox and container size
+
+            // --- Helper Functions ---
+
+            function displayLoadError(message) {
+                 console.error("Displaying Load Error:", message);
+                 // Display error within the Mazer structure if possible
+                 const pageContent = document.querySelector('.page-content');
+                 const errorHtml = `<div class="alert alert-danger" role="alert">
+                     <h4 class="alert-heading">Error Loading Visualization</h4>
+                     <p>Could not load or process the simulation data:</p>
+                     <hr>
+                     <pre class="mb-0" style="white-space: pre-wrap; word-wrap: break-word;">${message}</pre>
+                     <p class="mt-2">Please check the browser console and server logs for more details.</p>
+                     </div>`;
+                 if (pageContent) {
+                     pageContent.innerHTML = errorHtml; // Replace page content with error
+                 } else if (document.body) {
+                     document.body.innerHTML = `<div id="app"><div id="main">${errorHtml}</div></div>`; // Fallback
+                 } else {
+                     // Absolute fallback
+                     const errDiv = document.createElement('div');
+                     errDiv.innerHTML = errorHtml;
+                     errDiv.style.padding = '20px';
+                     document.documentElement.innerHTML = ''; // Clear everything
+                     document.documentElement.appendChild(errDiv);
+                 }
+             }
+
+            // --- Color Helper ---
+            function getCongestionColor(congestion, maxCongestion) {
+                if (maxCongestion <= 0) return 'var(--congestion-low-color)';
+                const ratio = Math.min(1, Math.max(0, congestion / maxCongestion));
+                let r, g, b;
+                if (ratio < 0.5) {
+                    const t = ratio * 2;
+                    r = Math.round(46 + (241 - 46) * t);
+                    g = Math.round(204 + (196 - 204) * t);
+                    b = Math.round(113 + (15 - 113) * t);
+                } else {
+                    const t = (ratio - 0.5) * 2;
+                    r = Math.round(241 + (231 - 241) * t);
+                    g = Math.round(196 + (76 - 196) * t);
+                    b = Math.round(15 + (60 - 15) * t);
+                }
+                return `rgb(${r}, ${g}, ${b})`;
+            }
+
+            // --- Charting Helpers ---
+            function createMiniBarChart(container, label, value, max, colorClass, unit = '') {
+                if (!container) return;
+                const percentage = (max > 0) ? Math.min(100, Math.max(0, (value / max) * 100)) : 0;
+                const displayValue = (value === null || value === undefined || isNaN(value)) ? 'N/A' : value.toFixed(2);
+                container.innerHTML = `
+                    <span class="chart-label">${label} (${displayValue}${unit})</span>
+                    <div class="chart-bar-bg">
+                        <div class="chart-bar ${colorClass}" style="width: ${percentage}%;"></div>
+                    </div>
+                `;
+            }
+
+            function createHistogram(svgElement, data, numBins, rangeMin, rangeMax, colorClass) {
+                 if (!svgElement || !data || data.length === 0) {
+                     if (svgElement) svgElement.innerHTML = '<text x="5" y="15" class="axis-label">No data</text>';
+                     return;
+                 }
+
+                 let effectiveRangeMax = rangeMax;
+                 let effectiveRangeMin = rangeMin;
+
+                 if (effectiveRangeMax <= effectiveRangeMin) {
+                    // Handle zero/negative range: try using actual max if data exists
+                    const actualMax = data.length > 0 ? Math.max(...data.filter(v => typeof v === 'number' && !isNaN(v))) : 1.0;
+                    if (actualMax > effectiveRangeMin) {
+                        console.warn(`Histogram range invalid or zero (${effectiveRangeMin} - ${effectiveRangeMax}). Using actual max ${actualMax.toFixed(1)}.`);
+                        effectiveRangeMax = actualMax;
+                         if (effectiveRangeMax <= effectiveRangeMin) { // Still bad? Default.
+                              console.warn(`Still invalid range. Defaulting to ${effectiveRangeMin} - ${effectiveRangeMin + 1}.`);
+                              effectiveRangeMax = effectiveRangeMin + 1.0;
+                         }
+                    } else {
+                         console.warn(`Histogram range invalid or zero (${effectiveRangeMin} - ${effectiveRangeMax}). Setting default range ${effectiveRangeMin} - ${effectiveRangeMin + 1}.`);
+                         effectiveRangeMax = effectiveRangeMin + 1.0; // Use a default range if calculated one is bad
+                    }
+
+                 }
+
+                 const binSize = (effectiveRangeMax - effectiveRangeMin) / numBins;
+                 const bins = new Array(numBins).fill(0);
+                 let dataMaxVal = -Infinity; // Actual max value in data
+
+                 data.forEach(val => {
+                     if (val === null || val === undefined || isNaN(val)) return; // Skip invalid
+                     dataMaxVal = Math.max(dataMaxVal, val);
+
+                     const clampedVal = Math.max(effectiveRangeMin, Math.min(val, effectiveRangeMax));
+                     let binIndex;
+                      if (binSize <= 0) {
+                          binIndex = 0;
+                      } else if (clampedVal >= effectiveRangeMax) { // Use >= to include max value
+                          binIndex = numBins - 1;
+                      } else {
+                          binIndex = Math.floor((clampedVal - effectiveRangeMin) / binSize);
+                      }
+                      binIndex = Math.max(0, Math.min(binIndex, numBins - 1));
+                      bins[binIndex]++;
+                 });
+
+                 // Display actual max on rate histogram if it exceeds the calculated range max
+                  let displayRangeMax = effectiveRangeMax;
+                  if (colorClass === 'rate' && dataMaxVal > effectiveRangeMax) {
+                     console.log(`Rate histogram max exceeded default ${effectiveRangeMax.toFixed(1)}, showing actual ${dataMaxVal.toFixed(1)} for label`);
+                     displayRangeMax = dataMaxVal; // Update the *label* max
+                  }
+
+                 const maxCount = Math.max(1, ...bins);
+                 // Use viewBox dimensions for relative calculations
+                 const svgWidth = 100; // Matches viewBox
+                 const svgHeight = 80;  // Matches viewBox
+                 const barWidth = svgWidth / numBins;
+                 const chartHeight = svgHeight - 15; // Space for labels
+
+                 let barsHtml = '';
+                 for (let i = 0; i < numBins; i++) {
+                     const barHeight = (bins[i] / maxCount) * chartHeight;
+                     const x = i * barWidth;
+                     const y = chartHeight - barHeight;
+                     const validBarHeight = Math.max(0, barHeight);
+                     barsHtml += `<rect class="hist-bar ${colorClass}" x="${x}" y="${y}" width="${barWidth - 1}" height="${validBarHeight}"></rect>`;
+                 }
+
+                  // Basic Axis using viewBox coordinates
+                  svgElement.innerHTML = `
+                      <g>${barsHtml}</g>
+                      <line class="axis" x1="0" y1="${chartHeight}" x2="${svgWidth}" y2="${chartHeight}"></line>
+                      <text class="axis-label" x="0" y="${svgHeight - 2}">${effectiveRangeMin.toFixed(1)}</text>
+                      <text class="axis-label" x="${svgWidth}" y="${svgHeight - 2}" text-anchor="end">${displayRangeMax.toFixed(1)}</text>
+                  `;
+             }
+
+            // --- Core Logic Functions ---
+
+            function loadInitialData() {
+                try {
+                    const dataElement = document.getElementById('initial-data');
+                    if (!dataElement) throw new Error("Initial data script tag (#initial-data) not found.");
+
+                    const rawContent = dataElement.textContent;
+                    let intermediateData = JSON.parse(rawContent);
+                    let parsedData = (typeof intermediateData === 'string') ? JSON.parse(intermediateData) : intermediateData;
+
+                    if (!parsedData) throw new Error("Parsed data object is null or undefined.");
+
+                     // Simple validation
+                     if (!parsedData.firing_rates || !parsedData.energy_levels || !parsedData.congestion_levels || !parsedData.routing_path_data) {
+                         throw new Error("Initial data is missing one or more required keys (firing_rates, energy_levels, congestion_levels, routing_path_data).");
+                     }
+                     if (parsedData.firing_rates.length !== parsedData.energy_levels.length || parsedData.firing_rates.length !== parsedData.congestion_levels.length) {
+                          throw new Error("Initial data array lengths mismatch.");
+                     }
+
+                    console.log("Initial data loaded and parsed successfully.");
+                    processLoadedData(parsedData);
+                    updateVisualization(); // Draw initial state
+
+                } catch (error) {
+                    console.error("Error loading initial data:", error);
+                    displayLoadError(error.message + (error.stack ? `\n${error.stack}`: ''));
+                }
+            }
+
+            function processLoadedData(data) {
+                const firing_rates = data.firing_rates || [];
+                const energy_levels = data.energy_levels || [];
+                const congestion_levels = data.congestion_levels || [];
+                const routing_data = data.routing_path_data || {};
+                const detailed_scores = data.detailed_node_scores || {};
+                const latencies = data.latencies_ms || []; // Get latencies
+
+                const newSize = firing_rates.length;
+                console.log(`Processing data for ${newSize} nodes.`);
+
+                if (newSize === 0) {
+                    console.warn("Received data with zero nodes.");
+                    networkSize = 0;
+                    nodesData = [];
+                    paths = {};
+                    selectedNodeId = null;
+                    maxEnergy = 1.0; maxCongestion = 1.0; maxFiringRate = 1.0; // Reset max values
+                    return; // Exit processing
+                }
+
+                // Calculate max values safely, providing defaults
+                maxEnergy = Math.max(1.0, ...(energy_levels.map(e => e ?? 0).filter(e => typeof e === 'number' && !isNaN(e))));
+                maxCongestion = Math.max(0.1, ...(congestion_levels.map(c => c ?? 0).filter(c => typeof c === 'number' && !isNaN(c))));
+                maxFiringRate = Math.max(1.0, ...(firing_rates.map(r => r ?? 0).filter(r => typeof r === 'number' && !isNaN(r)))); // Recalculate max rate
+
+
+                if (newSize !== networkSize || nodesData.length !== newSize) {
+                     networkSize = newSize;
+                     nodesData = Array.from({ length: networkSize }, (_, i) => ({ id: i, x:0, y:0 })); // Initialize with ID and placeholder coords
+                     generateNodePositions(networkSize);
+                     selectedNodeId = null; // Reset selection on resize
+                     console.log(`Network size changed/initialized to ${networkSize}. Regenerating layout.`);
+                 }
+
+                if(sourceNodeSpan) sourceNodeSpan.textContent = routing_data.source_node ?? '?';
+                if(destNodeSpan) destNodeSpan.textContent = routing_data.destination_node ?? '?';
+                if(dataTimestampSpan) dataTimestampSpan.textContent = data.timestamp ? new Date(data.timestamp).toLocaleString() : 'N/A';
+
+                // Populate node data
+                for (let i = 0; i < networkSize; i++) {
+                     let scoreInfo = detailed_scores[i.toString()] || {};
+                     if (!nodesData[i]) nodesData[i] = { id: i }; // Ensure node object exists
+
+                    nodesData[i] = {
+                        ...nodesData[i], // Keep existing x, y, id
+                        energy: energy_levels[i] ?? 0,
+                        congestion: congestion_levels[i] ?? 0,
+                        rate: firing_rates[i] ?? 0,
+                        latency: latencies[i] ?? -1, // Use latencies array
+                        scoreInfo: {
+                            composite_score: scoreInfo.composite_score ?? null,
+                            latency_contribution: scoreInfo.latency_contribution ?? null,
+                            energy_contribution: scoreInfo.energy_contribution ?? null,
+                            congestion_contribution: scoreInfo.congestion_contribution ?? null,
+                            firing_rate_contribution: scoreInfo.firing_rate_contribution ?? null,
+                             // Use raw values from scoreInfo FIRST, fallback to main arrays
+                            raw_latency_ms: scoreInfo.raw_latency_ms ?? latencies[i] ?? -1,
+                            raw_energy_level: scoreInfo.raw_energy_level ?? energy_levels[i] ?? 0,
+                            raw_congestion_level: scoreInfo.raw_congestion_level ?? congestion_levels[i] ?? 0,
+                            raw_firing_rate_hz: scoreInfo.raw_firing_rate_hz ?? firing_rates[i] ?? 0,
+                        }
+                    };
+                }
+
+                 // Process paths
+                paths = {
+                   heuristic: { path: routing_data.selected_path || [], score: routing_data.stdp_path_score ?? null }
+                };
+
+                console.log("Data processing complete. State:", { networkSize, maxEnergy, maxCongestion, maxFiringRate });
+            }
+
+
+             function generateNodePositions(N) {
+                 if (N <= 0 || nodesData.length !== N) return;
+
+                 const graphRadius = Math.min(SVG_VIEWBOX_WIDTH, SVG_VIEWBOX_HEIGHT) / 2 * 0.80; // Adjust radius
+                 const centerX = SVG_VIEWBOX_WIDTH / 2;
+                 const centerY = SVG_VIEWBOX_HEIGHT / 2;
+
+                 for (let i = 0; i < N; i++) {
+                     const angle = (N <= 1) ? (-Math.PI / 2) : ((i / N) * 2 * Math.PI - Math.PI / 2);
+                     if(nodesData[i]) {
+                        nodesData[i].x = centerX + graphRadius * Math.cos(angle);
+                        nodesData[i].y = centerY + graphRadius * Math.sin(angle);
+                     }
+                 }
+                 console.log(`Generated/Updated positions for ${N} nodes.`);
+             }
+
+            function drawNetwork() {
+                if (!svg) { console.error("SVG element not found!"); return; }
+                svg.innerHTML = ''; // Clear previous drawings
+
+                if (networkSize === 0) {
+                    svg.innerHTML = '<text x="50%" y="50%" fill="var(--bs-secondary-color)" text-anchor="middle" dominant-baseline="middle">Network data unavailable.</text>';
+                    return;
+                }
+
+                console.log(`Drawing base network for ${networkSize} nodes.`);
+                const linksGroup = document.createElementNS("http://www.w3.org/2000/svg", "g"); linksGroup.id = 'links'; svg.appendChild(linksGroup);
+                const heuristicLinksGroup = document.createElementNS("http://www.w3.org/2000/svg", "g"); heuristicLinksGroup.id = 'heuristic-links'; svg.appendChild(heuristicLinksGroup);
+                const nodesGroup = document.createElementNS("http://www.w3.org/2000/svg", "g"); nodesGroup.id = 'nodes'; svg.appendChild(nodesGroup);
+
+                // Draw potential links
+                for (let i = 0; i < networkSize; i++) {
+                    for (let j = i + 1; j < networkSize; j++) {
+                        if (!nodesData[i]?.x || !nodesData[j]?.x) continue;
+                        const link = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        link.setAttribute('x1', nodesData[i].x); link.setAttribute('y1', nodesData[i].y);
+                        link.setAttribute('x2', nodesData[j].x); link.setAttribute('y2', nodesData[j].y);
+                        link.setAttribute('class', 'link potential'); link.id = `link-${i}-${j}`;
+                        linksGroup.appendChild(link);
+                     }
+                }
+
+                // Draw nodes
+                nodesData.forEach(node => {
+                     if (!node || node.x === undefined) return;
+                     const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                     group.classList.add('node'); group.id = `node-${node.id}`;
+                     group.setAttribute('transform', `translate(${node.x}, ${node.y})`);
+
+                     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                     circle.setAttribute('r', BASE_RADIUS);
+
+                     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                     text.textContent = node.id;
+
+                     group.appendChild(circle); group.appendChild(text);
+                     group.addEventListener('click', () => selectNode(node.id));
+                     nodesGroup.appendChild(group);
+                 });
+                 console.log("Finished drawing base network elements.");
+            }
+
+            function applyCurrentStateToVisualization() {
+                 if (networkSize === 0 || nodesData.length !== networkSize) {
+                      console.warn("applyCurrentState: Skipping due to zero size or data mismatch.");
+                      return;
+                  }
+                  console.log("Applying current state to visualization...");
+                 nodesData.forEach(node => {
+                     if (!node) return;
+                     const group = document.getElementById(`node-${node.id}`);
+                     if (group) {
+                         const circle = group.querySelector('circle');
+                         if(!circle) return;
+
+                         const nodeColor = getCongestionColor(node.congestion ?? 0, maxCongestion);
+                         circle.setAttribute('fill', nodeColor);
+
+                         const energyRatio = maxEnergy > 0 ? Math.max(0, Math.min(1, (node.energy ?? 0) / maxEnergy)) : 0;
+                         const radius = BASE_RADIUS + energyRatio * MAX_RADIUS_INCREASE;
+                         circle.setAttribute('r', radius);
+
+                         group.classList.toggle('selected', node.id === selectedNodeId);
+                     }
+                 });
+                 updatePathVisualization();
+                 displayNodeInfo(selectedNodeId); // This will also update charts
+                 drawGlobalHistograms(); // Update histograms
+                 console.log("Finished applying state.");
+             }
+
+            function displayNodeInfo(nodeId) {
+                 const nodeChartsContainer = document.getElementById('node-charts-container'); // Re-get
+
+                 if (nodeId === null || nodeId < 0 || nodeId >= nodesData.length || !nodesData[nodeId]) {
+                     if(nodeInfoTitle) nodeInfoTitle.textContent = "Selected Node Info";
+                     if(nodeInfoDefaultText) nodeInfoDefaultText.style.display = 'block';
+                     if(nodeDetailsPre) { nodeDetailsPre.textContent = ""; nodeDetailsPre.style.display = 'none'; }
+                      if (nodeChartsContainer) nodeChartsContainer.style.display = 'none';
+                     return;
+                 }
+
+                 const node = nodesData[nodeId];
+                 if(!nodeInfoTitle || !nodeInfoDefaultText || !nodeDetailsPre || !nodeChartsContainer) return;
+
+                 nodeInfoTitle.textContent = `Node ${node.id} Details`;
+                 nodeInfoDefaultText.style.display = 'none';
+                 nodeDetailsPre.style.display = 'block';
+                 nodeChartsContainer.style.display = 'block';
+
+                 const formatNum = (num, digits = 2) => (num === null || num === undefined || isNaN(num)) ? 'N/A' : num.toFixed(digits);
+                 const formatLatency = (lat) => (lat === -1 || lat === null || lat === undefined || isNaN(lat)) ? 'N/A' : lat.toFixed(1) + ' ms';
+
+                  const scoreInfo = node.scoreInfo || {};
+                   // Use the raw values stored in scoreInfo first, fallback to direct node properties
+                  const energy = scoreInfo.raw_energy_level ?? node.energy ?? 0;
+                  const congestion = scoreInfo.raw_congestion_level ?? node.congestion ?? 0;
+                  const rate = scoreInfo.raw_firing_rate_hz ?? node.rate ?? 0;
+                  const latency = scoreInfo.raw_latency_ms ?? node.latency ?? -1; // Use latency from node data
+                  const compositeScore = scoreInfo.composite_score ?? null;
+
+
+                 let details = `Raw Values (at this timestamp):\n` +
+                               `  Energy:     ${formatNum(energy)} / ${formatNum(maxEnergy)}\n` +
+                               `  Congestion: ${formatNum(congestion, 3)} / ${formatNum(maxCongestion, 3)}\n` +
+                               `  Firing Rate:${formatNum(rate)} Hz\n` +
+                               `  Latency:    ${formatLatency(latency)}\n\n`; // Added latency here
+
+                 if (compositeScore !== null) {
+                    details += `Routing Score & Contributions:\n`;
+                    details += `  Latency:    ${formatNum(scoreInfo.latency_contribution, 3)}\n`;
+                    details += `  Energy:     ${formatNum(scoreInfo.energy_contribution, 3)}\n`;
+                    details += `  Congestion: ${formatNum(scoreInfo.congestion_contribution, 3)}\n`;
+                    details += `  Firing Rate:${formatNum(scoreInfo.firing_rate_contribution, 3)}\n\n`;
+                    details += `Composite Score: ${formatNum(compositeScore, 4)}`;
+                 } else {
+                     details += `Routing Score: N/A`;
+                 }
+                 nodeDetailsPre.textContent = details;
+
+                 // Display Mini Charts using the same raw values
+                  createMiniBarChart(chartEnergyDiv, 'Energy', energy, maxEnergy, 'energy');
+                  createMiniBarChart(chartCongestionDiv, 'Congestion', congestion, maxCongestion, 'congestion');
+                  createMiniBarChart(chartRateDiv, 'Firing Rate', rate, maxFiringRate, 'rate', ' Hz'); // Use recalculated maxFiringRate
+                  // Assume composite score is normalized between 0 and 1, adjust max if needed
+                  createMiniBarChart(chartScoreDiv, 'Composite Score', compositeScore, 1.0, 'score');
+             }
+
+
+            function drawGlobalHistograms() {
+                // Re-get elements just in case they were wiped by error display etc.
+                const svgHistCongestionElem = document.getElementById('svg-hist-congestion');
+                const svgHistEnergyElem = document.getElementById('svg-hist-energy');
+                const svgHistRateElem = document.getElementById('svg-hist-rate');
+
+                if (networkSize === 0 || nodesData.length !== networkSize) {
+                     console.warn("drawGlobalHistograms: Skipping, no valid node data.");
+                     if(svgHistCongestionElem) svgHistCongestionElem.innerHTML = '<text x="5" y="15" class="axis-label">No data</text>';
+                     if(svgHistEnergyElem) svgHistEnergyElem.innerHTML = '<text x="5" y="15" class="axis-label">No data</text>';
+                     if(svgHistRateElem) svgHistRateElem.innerHTML = '<text x="5" y="15" class="axis-label">No data</text>';
+                     return;
+                 }
+
+                const numBins = 10;
+
+                const congestionData = nodesData.map(n => n?.congestion).filter(c => typeof c === 'number' && !isNaN(c));
+                const energyData = nodesData.map(n => n?.energy).filter(e => typeof e === 'number' && !isNaN(e));
+                const rateData = nodesData.map(n => n?.rate).filter(r => typeof r === 'number' && !isNaN(r));
+
+                // Use the calculated max values, ensuring they are valid numbers > 0
+                const congestionMaxValid = (typeof maxCongestion === 'number' && !isNaN(maxCongestion) && maxCongestion > 0) ? maxCongestion : 1.0;
+                const energyMaxValid = (typeof maxEnergy === 'number' && !isNaN(maxEnergy) && maxEnergy > 0) ? maxEnergy : 10.0;
+                 const rateMaxValid = (typeof maxFiringRate === 'number' && !isNaN(maxFiringRate) && maxFiringRate > 0) ? maxFiringRate : 1.0; // Use recalculated max
+
+
+                createHistogram(svgHistCongestionElem, congestionData, numBins, 0, congestionMaxValid, 'congestion');
+                createHistogram(svgHistEnergyElem, energyData, numBins, 0, energyMaxValid, 'energy');
+                createHistogram(svgHistRateElem, rateData, numBins, 0, rateMaxValid, 'rate'); // Use recalculated rate max
+             }
+
+            function updatePathVisualization() {
+                 updatePathLinks('heuristic-links', paths.heuristic?.path || [], 'heuristic-path');
+
+                 if(heuristicPathSpan) heuristicPathSpan.textContent = paths.heuristic?.path?.join(' → ') || 'N/A'; // Use arrow
+                 if(heuristicScoreSpan) heuristicScoreSpan.textContent = (paths.heuristic?.path?.length > 0 && paths.heuristic.score != null) ? `Avg Score: ${paths.heuristic.score.toFixed(3)}` : '';
+            }
+
+             function updatePathLinks(groupId, pathArray, pathClass) {
+                const group = document.getElementById(groupId); if (!group) return;
+                group.innerHTML = '';
+                if (!Array.isArray(pathArray) || pathArray.length < 2) return;
+
+                for (let i = 0; i < pathArray.length - 1; i++) {
+                    const fromNodeId = pathArray[i]; const toNodeId = pathArray[i + 1];
+                    if (fromNodeId === null || toNodeId === null || !nodesData[fromNodeId]?.x || !nodesData[toNodeId]?.x) {
+                       console.warn(`Invalid node data/index in path: ${fromNodeId} -> ${toNodeId}. Skipping link.`); continue;
+                    }
+
+                    const nodeA = nodesData[fromNodeId]; const nodeB = nodesData[toNodeId];
+                    const link = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                    link.setAttribute('x1', nodeA.x); link.setAttribute('y1', nodeA.y);
+                    link.setAttribute('x2', nodeB.x); link.setAttribute('y2', nodeB.y);
+                    link.setAttribute('class', `link ${pathClass}`);
+                    link.id = `${pathClass}-link-${fromNodeId}-${toNodeId}`;
+                    group.appendChild(link);
+                }
+             }
+
+            function selectNode(nodeId) {
+                selectedNodeId = (selectedNodeId === nodeId) ? null : nodeId;
+                // Only need to apply state, not redraw whole network
+                applyCurrentStateToVisualization();
+            }
+
+            function updateVisualization() {
+                console.log("Running updateVisualization...");
+                if (networkSize === 0) {
+                    console.log("UpdateVisualization: Network size is zero.");
+                    drawNetwork(); // Will draw the "unavailable" message
+                    displayNodeInfo(null);
+                    updatePathVisualization();
+                    drawGlobalHistograms();
+                    return;
+                }
+                // Redraw base structure (nodes/potential links)
+                 drawNetwork();
+                 // Apply current colors, sizes, paths, info panels, charts, histograms
+                 applyCurrentStateToVisualization();
+                 console.log("updateVisualization completed.");
+             }
+
+            // --- Initial Setup ---
+            // No resize handler needed as SVG scales with viewBox within its container
+            loadInitialData(); // Load data and trigger initial render
+
+        }); // ****** END OF SCRIPT BLOCK ******
+    </script>
+
+    <!-- Mazer Template JS -->
+    <script src="{% static 'assets/static/js/components/dark.js' %}"></script>
+    <script src="{% static 'assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'assets/compiled/js/app.js' %}"></script>
+    <!-- Feather Icons are used in Mazer template elements -->
+    <script src="{% static 'assets/extensions/feather-icons/feather.min.js' %}"></script>
+    <script src="{% static 'assets/static/js/pages/feather-icons.js' %}"></script>
+
+</body>
+</html>

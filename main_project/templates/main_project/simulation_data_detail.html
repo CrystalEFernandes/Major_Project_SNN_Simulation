@@ -353,7 +353,8 @@
                         </div>
                         <div class="modal-body">
                             {% if routing_path.neighbor_scores_history_json %}
-                            {% with neighbor_scores_history=routing_path.neighbor_scores_history_json|safe|json_loads %}
+                            {% comment %} Assuming you have a template tag 'json_loads' to parse the JSON string {% endcomment %}
+                            {% with neighbor_scores_history=routing_path.neighbor_scores_history_json|json_loads %}
                             {% for source_node_id, neighbor_data in neighbor_scores_history.items %}
                             <div class="detail-subsection">
                                 <h3>Source Node {{ source_node_id }} - Neighbor Scores</h3>
@@ -363,10 +364,10 @@
                                             <tr>
                                                 <th>Neighbor Node</th>
                                                 <th>Composite Score</th>
-                                                <th>Latency Score</th>
-                                                <th>Energy Score</th>
-                                                <th>Congestion Score</th>
-                                                <th>Firing Rate</th>
+                                                <th>Latency Contrib.</th> <!-- Adjusted Header -->
+                                                <th>Energy Contrib.</th>  <!-- Adjusted Header -->
+                                                <th>Congestion Contrib.</th><!-- Adjusted Header -->
+                                                <th>Firing Rate (Hz)</th> <!-- Adjusted Header -->
                                                 <th>Latency (ms)</th>
                                                 <th>Energy Level</th>
                                                 <th>Congestion Level</th>
@@ -376,20 +377,25 @@
                                             {% for neighbor_node_id, metrics in neighbor_data.items %}
                                             <tr>
                                                 <td>{{ neighbor_node_id }}</td>
-                                                <td>{{ metrics.composite_score|floatformat:2|default:"N/A" }}</td>
-                                                <td>{{ metrics.latency_score|floatformat:2|default:"N/A" }}</td>
-                                                <td>{{ metrics.energy_score|floatformat:2|default:"N/A" }}</td>
-                                                <td>{{ metrics.congestion_score|floatformat:2|default:"N/A" }}</td>
-                                                <td>{{ metrics.firing_rate|floatformat:2|default:"N/A" }}</td>
-                                                <td>{{ metrics.latency_ms|floatformat:2|default:"N/A" }}</td>
-                                                <td>{{ metrics.energy_level|floatformat:2|default:"N/A" }}</td>
-                                                <td>{{ metrics.congestion_level|floatformat:2|default:"N/A" }}</td>
+                                                <td>{{ metrics.composite_score | floatformat:2 | default:"N/A" }}</td>
+                                                {# Use the keys that exist in your JSON data #}
+                                                <td>{{ metrics.latency_contribution | floatformat:2 | default:"N/A" }}</td>
+                                                <td>{{ metrics.energy_contribution | floatformat:2 | default:"N/A" }}</td>
+                                                <td>{{ metrics.congestion_contribution | floatformat:2 | default:"N/A" }}</td>
+                                                <td>{{ metrics.raw_firing_rate_hz | floatformat:2 | default:"N/A" }}</td>
+                                                <td>{{ metrics.raw_latency_ms | floatformat:2 | default:"N/A" }}</td>
+                                                <td>{{ metrics.raw_energy_level | floatformat:2 | default:"N/A" }}</td>
+                                                <td>{{ metrics.raw_congestion_level | floatformat:2 | default:"N/A" }}</td>
                                             </tr>
+                                            {% empty %}
+                                            <tr><td colspan="9">No neighbor data found for this source node.</td></tr>
                                             {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            {% empty %}
+                             <p>Neighbor scores history is empty or invalid.</p>
                             {% endfor %}
                             {% endwith %}
                             {% else %}

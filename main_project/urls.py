@@ -21,6 +21,9 @@ urlpatterns = [
     path('simulation-report/<int:simulation_id>/', views.view_simulation_report, name='simulation_report'),
 
 
-     path("upload-ipfs/", views.ipfs_upload_view, name="ipfs-upload"),
+    path("upload-ipfs/", views.ipfs_upload_view, name="ipfs-upload"),
+
+    path('details/<int:pk>/', views.data_point_detail, name='data_point_detail'),
+    path('simulation-data/<int:pk>/visualize/', views.simulation_data_visualizer_view, name='simulation_data_visualize'),
 
 ]

@@ -551,3 +551,259 @@ def ipfs_upload_view(request):
         else:
             return render(request, "main_project/upload_form.html", {"error": "No file uploaded."})
     return render(request, "main_project/upload_form.html")
+
+####RENDER GRAPH
+import json
+from django.shortcuts import render, get_object_or_404
+from django.http import Http404
+from django.core.serializers.json import DjangoJSONEncoder # Handles dates/times if needed
+from .models import RoutingPath
+
+# (Keep the parse_path_string helper function from the Mermaid example - it's useful)
+def parse_path_string(path_str):
+    """ Parses various path string formats into a list of node strings. """
+    nodes = []
+    if not path_str: return nodes
+    try:
+        parsed_nodes = json.loads(path_str)
+        if isinstance(parsed_nodes, list):
+            nodes = [str(n).strip() for n in parsed_nodes if str(n).strip()]
+            return nodes
+    except (json.JSONDecodeError, TypeError): pass
+    path_str_cleaned = path_str.strip()
+    if not path_str_cleaned: return nodes
+    if ' -> ' in path_str_cleaned: nodes = [n.strip() for n in path_str_cleaned.split(' -> ') if n.strip()]
+    elif ',' in path_str_cleaned: nodes = [n.strip() for n in path_str_cleaned.split(',') if n.strip()]
+    elif ' ' in path_str_cleaned: nodes = [n.strip() for n in path_str_cleaned.split() if n.strip()]
+    else: nodes = [path_str_cleaned]
+    return nodes
+
+
+def data_point_detail(request, pk):
+    try:
+        routing_path = get_object_or_404(RoutingPath, pk=pk)
+    except (RoutingPath.DoesNotExist, ValueError):
+        routing_path = None
+    except Exception as e:
+        print(f"Error fetching routing path: {e}")
+        routing_path = None
+
+    vis_graph_data = None # Data structure for Vis.js
+
+    if routing_path and routing_path.stdp_path:
+        try:
+            nodes_in_path = parse_path_string(routing_path.stdp_path)
+
+            if nodes_in_path:
+                vis_nodes = []
+                vis_edges = []
+
+                # Create Vis.js nodes
+                for i, node_id in enumerate(nodes_in_path):
+                    node_data = {
+                        'id': node_id,       # Use the node ID from path
+                        'label': str(node_id) # Display the node ID as label
+                    }
+                    # Highlight start and end nodes visually
+                    if i == 0:
+                        node_data['color'] = {'background': '#d4edda', 'border': '#155724'}
+                        node_data['font'] = {'color': '#155724'}
+                    elif i == len(nodes_in_path) - 1:
+                         node_data['color'] = {'background': '#f8d7da', 'border': '#721c24'}
+                         node_data['font'] = {'color': '#721c24'}
+                    vis_nodes.append(node_data)
+
+                # Create Vis.js edges (connections)
+                for i in range(len(nodes_in_path) - 1):
+                    vis_edges.append({
+                        'from': nodes_in_path[i],
+                        'to': nodes_in_path[i+1],
+                        'arrows': 'to' # Show direction
+                    })
+
+                # Package data for the template
+                vis_graph_data = {
+                    'nodes': vis_nodes,
+                    'edges': vis_edges
+                }
+
+        except Exception as e:
+            print(f"Error preparing data for Vis.js: {e}")
+            vis_graph_data = None
+
+    context = {
+        'routing_path': routing_path,
+        # Pass the Vis.js data as JSON
+        'vis_graph_data_json': json.dumps(vis_graph_data, cls=DjangoJSONEncoder) if vis_graph_data else None,
+        # Keep other context variables if needed
+    }
+    return render(request, 'graph.html', context)
+
+##NEW GRAPH
+# Add near other imports at the top of views.py
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import Http404, JsonResponse # Import JsonResponse if not already there
+from .models import SimulationDataPoint, RoutingPath # Make sure models are imported
+import json
+import logging
+
+logger = logging.getLogger(__name__) # Ensure logger is defined
+
+# --- NEW VIEW ---
+def simulation_data_visualizer_view(request, pk):
+    """
+    View to render the graph visualization for a specific SimulationDataPoint ID (pk).
+    Data is loaded once and passed to the template.
+    """
+    try:
+        # 1. Fetch the specific SimulationDataPoint
+        data_point = get_object_or_404(SimulationDataPoint, pk=pk)
+        logger.info(f"Fetching visualization data for SimulationDataPoint {pk}")
+
+        # 2. Initialize the payload dictionary for JavaScript
+        payload = {
+            "timestamp": data_point.timestamp.isoformat() if data_point.timestamp else None,
+            "simulation_time_ms": data_point.simulation_time_ms,
+            "firing_rates": [],
+            "latencies_ms": [],
+            "energy_levels": [],
+            "congestion_levels": [],
+            "cycle_number": getattr(data_point, 'cycle_number', None), # If you add cycle_number later
+            "routing_path_data": {},
+            "detailed_node_scores": {}, # Initialize as empty dict
+        }
+
+        # 3. Safely parse basic per-node data lists from SimulationDataPoint
+        try:
+            payload["firing_rates"] = json.loads(data_point.firing_rates_json or '[]')
+            payload["latencies_ms"] = json.loads(data_point.latencies_ms_json or '[]')
+            payload["energy_levels"] = json.loads(data_point.energy_levels_json or '[]')
+            payload["congestion_levels"] = json.loads(data_point.congestion_levels_json or '[]')
+            logger.debug(f"Parsed basic node lists for {pk}. N={len(payload['firing_rates'])}")
+        except json.JSONDecodeError as e_parse:
+            logger.error(f"Failed to parse base JSON data for SimulationDataPoint {pk}: {e_parse}")
+            # Decide how to handle: raise error, return error page, or continue with empty lists?
+            # Let's continue with empty lists for now, JS should handle it.
+            pass
+        except Exception as e_base:
+            logger.error(f"Error loading base data for SimulationDataPoint {pk}: {e_base}")
+            pass # Continue with empty lists
+
+
+        # 4. Get related RoutingPath data and reconstruct detailed scores
+        routing_path = data_point.routing_path
+        if routing_path:
+            logger.info(f"Found related RoutingPath {routing_path.pk}")
+            stdp_path_list = json.loads(routing_path.stdp_path or '[]')
+            neighbor_scores_history = json.loads(routing_path.neighbor_scores_history_json or '{}')
+
+            # *** RECONSTRUCTION of detailed_node_scores ***
+            reconstructed_detailed_scores = {}
+            if isinstance(neighbor_scores_history, dict):
+                for source_node_str, neighbors in neighbor_scores_history.items():
+                    if isinstance(neighbors, dict):
+                        for neighbor_idx_str, score_details in neighbors.items():
+                            # Store the first instance found for each neighbor ID
+                            if neighbor_idx_str not in reconstructed_detailed_scores and isinstance(score_details, dict):
+                                reconstructed_detailed_scores[neighbor_idx_str] = score_details
+                logger.info(f"Reconstructed detailed scores for {len(reconstructed_detailed_scores)} nodes from history.")
+            else:
+                logger.warning(f"Neighbor scores history for RoutingPath {routing_path.pk} is not a valid dictionary.")
+
+
+            payload["routing_path_data"] = {
+                "source_node": routing_path.source_node,
+                "destination_node": routing_path.destination_node,
+                "dijkstra_path": [], # Add logic if Dijkstra path is stored elsewhere
+                "dijkstra_cost": None, # Add logic if cost is stored
+                "selected_path": stdp_path_list, # Heuristic path
+                "stdp_path_score": routing_path.stdp_path_score,
+                # "neighbor_scores_history": neighbor_scores_history # Optionally include if JS needs it
+            }
+            # Use the reconstructed scores
+            payload["detailed_node_scores"] = reconstructed_detailed_scores
+
+        else:
+            logger.warning(f"No RoutingPath linked to SimulationDataPoint {pk}. Visualization may lack path/score details.")
+            # Provide empty defaults for routing data if no link exists
+            payload["routing_path_data"] = { "source_node": None, "destination_node": None, "dijkstra_path": [], "dijkstra_cost": None, "selected_path": [], "stdp_path_score": None }
+            payload["detailed_node_scores"] = {}
+
+
+        # 5. Pass data to the template
+        context = {
+            'simulation_data_point_pk': pk,
+            'initial_simulation_data_json': json.dumps(payload, cls=DjangoJSONEncoder),
+        }
+        # Render the graph.html template, passing the context
+        return render(request, 'graph.html', context)
+
+    except SimulationDataPoint.DoesNotExist:
+        logger.warning(f"SimulationDataPoint with pk={pk} not found.")
+        raise Http404("Simulation Data Point not found.")
+    except Exception as e:
+        logger.exception(f"Unexpected error loading visualizer view for SimulationDataPoint {pk}: {e}")
+        raise Http404(f"An error occurred loading the visualization data for Simulation {pk}.")
+
+    """
+    API endpoint to fetch the most recent simulation data record.
+    RECONSTRUCTS detailed_node_scores from neighbor history.
+    Used by the polling version of graph.html (if needed).
+    """
+    try:
+        latest_data_point = SimulationDataPoint.objects.order_by('-timestamp').first()
+        if not latest_data_point:
+            return JsonResponse({"error": "No simulation data found."}, status=404)
+
+        logger.info(f"API: Fetching latest data (SimulationDataPoint {latest_data_point.pk})")
+
+        payload = {
+            "timestamp": latest_data_point.timestamp.isoformat() if latest_data_point.timestamp else None,
+            "simulation_time_ms": latest_data_point.simulation_time_ms,
+            "firing_rates": json.loads(latest_data_point.firing_rates_json or '[]'),
+            "latencies_ms": json.loads(latest_data_point.latencies_ms_json or '[]'),
+            "energy_levels": json.loads(latest_data_point.energy_levels_json or '[]'),
+            "congestion_levels": json.loads(latest_data_point.congestion_levels_json or '[]'),
+            "cycle_number": getattr(latest_data_point, 'cycle_number', None),
+            "routing_path_data": {},
+            "detailed_node_scores": {},
+        }
+
+        routing_path = latest_data_point.routing_path
+        if routing_path:
+            logger.info(f"API: Found related RoutingPath {routing_path.pk}")
+            stdp_path_list = json.loads(routing_path.stdp_path or '[]')
+            neighbor_scores_history = json.loads(routing_path.neighbor_scores_history_json or '{}')
+
+            reconstructed_detailed_scores = {}
+            if isinstance(neighbor_scores_history, dict):
+                 for source_node_str, neighbors in neighbor_scores_history.items():
+                     if isinstance(neighbors, dict):
+                         for neighbor_idx_str, score_details in neighbors.items():
+                             if neighbor_idx_str not in reconstructed_detailed_scores and isinstance(score_details, dict):
+                                 reconstructed_detailed_scores[neighbor_idx_str] = score_details
+                 logger.info(f"API: Reconstructed detailed scores for {len(reconstructed_detailed_scores)} nodes.")
+            else:
+                 logger.warning(f"API: Neighbor scores history for RoutingPath {routing_path.pk} is not a valid dictionary.")
+
+
+            payload["routing_path_data"] = {
+                "source_node": routing_path.source_node,
+                "destination_node": routing_path.destination_node,
+                "dijkstra_path": [],
+                "dijkstra_cost": None,
+                "selected_path": stdp_path_list,
+                "stdp_path_score": routing_path.stdp_path_score,
+                # "neighbor_scores_history": neighbor_scores_history
+            }
+            payload["detailed_node_scores"] = reconstructed_detailed_scores
+        else:
+            logger.warning(f"API: No RoutingPath linked to latest SimulationDataPoint {latest_data_point.pk}.")
+            payload["routing_path_data"] = { "source_node": None, "destination_node": None, "dijkstra_path": [], "dijkstra_cost": None, "selected_path": [], "stdp_path_score": None }
+            payload["detailed_node_scores"] = {}
+
+        return JsonResponse(payload)
+
+    except Exception as e:
+        logger.exception(f"API: Error fetching latest simulation data: {e}")
+        return JsonResponse({"error": "An internal error occurred fetching data."}, status=500)

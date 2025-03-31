@@ -1,0 +1,429 @@
+import requests
+import numpy as np
+from brian2 import *
+import networkx as nx
+import heapq
+import time
+import logging
+import datetime  # Import datetime for timestamp
+import json # Import json for json.dumps
+
+# Enable logging
+logging.basicConfig(
+    level=logging.DEBUG,  # Keep the logging level as DEBUG or your desired level
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename='simulation.log',  # Specify the filename for the log file
+    filemode='a'  # 'w' for write (overwrite if file exists), 'a' for append
+)
+DEBUG_STDP = False  # Debug flag for STDP logging
+
+# API Endpoints
+SNN_SETTINGS_API = "http://127.0.0.1:8000/api/snn_settings/"
+UPDATE_STATUS_API = "http://127.0.0.1:8000/api/update_status/"
+SEND_SIMULATION_DATA_API = "http://127.0.0.1:8000/api/simulation_data/"
+
+# --- 3. Ensure Proper Django Integration ---
+# ✅ Handle API Failures Gracefully: Retry with exponential backoff
+def fetch_snn_settings(max_retries=3, backoff_factor=2):
+    retries = 0
+    while retries < max_retries:
+        try:
+            response = requests.get(SNN_SETTINGS_API)
+            if response.status_code == 200:
+                return response.json()
+            else:
+                logging.error(f"Failed to fetch SNN settings, status code: {response.status_code}")
+            #pass
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Error fetching SNN settings: {e}")
+
+        retries += 1
+        wait_time = backoff_factor ** retries
+        logging.info(f"Retrying to fetch SNN settings in {wait_time} seconds...")
+        time.sleep(wait_time)
+
+    logging.error("Max retries reached, using default SNN settings.")
+    return {} # Return empty dict on failure
+
+def get_network_status(spike_monitor, N, neuron_energy_levels, neuron_congestion_levels):
+    # ✅ Fix get_network_status() Issues: Fetch real metrics
+    spike_trains = spike_monitor.spike_trains()
+    firing_rates = [len(spike_trains[i]) / (simulation_time / second) if i in spike_trains else 0 for i in range(N)] # Corrected firing rate calculation
+    latencies = [spike_trains[i][0] / ms if i in spike_trains and len(spike_trains[i]) > 0 else np.inf for i in range(N)]
+
+    # ✅ Energy Consumption Model: Use stateful energy levels
+    energy_consumption = neuron_energy_levels
+
+    avg_latency = np.mean([lt for lt in latencies if lt != np.inf]) if any(lt != np.inf for lt in latencies) else np.inf
+    avg_energy = np.mean(energy_consumption)
+
+    total_packets = sum(len(spike_trains[i]) if i in spike_trains else 0 for i in range(N)) # Total spikes as proxy for packets
+    active_nodes = sum(1 for fr in firing_rates if fr > 0)
+
+    return {
+        "total_nodes": int(N),
+        "active_nodes": int(active_nodes),
+        "total_packets": int(total_packets), # Use total spikes as packet count
+        "avg_latency": float(avg_latency) if avg_latency != np.inf else -1, #Handle inf as -1 for API
+        "avg_energy": float(avg_energy)
+    }
+
+snn_settings = fetch_snn_settings()
+
+# Update parameters based on Django settings
+learning_rate = snn_settings.get("learning_rate", 0.01)
+synaptic_weight = snn_settings.get("synaptic_weight", 0.005)
+vt = snn_settings.get("firing_threshold", -54) * mV
+vr = snn_settings.get("reset_potential", -65) * mV
+taupre = snn_settings.get("tau_pre", 20) * ms
+taupost = snn_settings.get("tau_post", 20) * ms
+
+# Network Parameters
+N = 5  # Number of neurons (routers)
+simulation_time = snn_settings.get("simulation_time", 10) * second # Fetch sim time from settings if available
+if simulation_time is None:
+    simulation_time = 10 * second # Default if not in settings
+
+# --- 1. Improve SNN Efficiency & Realism ---
+# ✅ Neuron Model: Adaptive Threshold and Refractory Period
+eqs = '''
+dv/dt = (El - v + R * ge * (Ee - v)) / taum : volt
+dge/dt = -ge / taue : 1
+dvt/dt = (vt_rest - vt) / tau_vt : volt # Adaptive threshold
+'''
+
+# Adaptive threshold parameters
+tau_vt = 100 * ms
+vt_rest = -54 * mV
+vth_increment = 2 * mV # Increment threshold after spike
+
+# Constants
+taum = 10 * ms
+El = -65 * mV
+Ee = 0 * mV
+R = 10
+taue = 5 * ms
+F = 50 * Hz  # Input firing rate
+
+# STDP Parameters
+gmax = 0.01
+dApre = 0.01
+dApost = -dApre * taupre / taupost * 1.05
+dApost *= gmax
+dApre *= gmax
+
+# Poisson input
+poisson_input = PoissonGroup(N, rates=F)
+
+# Create neurons with adaptive threshold and refractory period
+neurons = NeuronGroup(N, eqs, threshold='v > vt', reset='''v = vr; vt += vth_increment''',  # Reset and adaptive threshold
+                    refractory=2*ms, method='euler',
+                    namespace={'vt':vt, 'vt_rest':vt_rest, 'vth_increment':vth_increment}) # Initialize vt and constants
+neurons.v = vr
+neurons.vt = vt # Initialize adaptive threshold
+
+# Define synapses with STDP
+S = Synapses(poisson_input, neurons,
+             '''w : 1
+                dApre/dt = -Apre / taupre : 1 (event-driven)
+                dApost/dt = -Apost / taupost : 1 (event-driven)''',
+             on_pre='''ge += w
+                       Apre += dApre
+                       w = clip(w + Apost, 0, gmax)''',
+             on_post='''Apost += dApost
+                        w = clip(w + Apre, 0, gmax)''')
+
+S.connect(condition='i != j')
+S.w = 'rand() * gmax + synaptic_weight'
+
+# Initialize stateful router metrics
+neuron_energy_levels = np.ones(N) * 10  # Initial energy levels for each neuron (router)
+neuron_congestion_levels = np.zeros(N) # Initial congestion levels
+
+# --- NEW: Metric update parameters ---
+energy_consumption_per_spike = 0.1  # Energy consumed per spike
+energy_recovery_rate = 0.01       # Energy recovered per time step
+max_energy_level = 10.0            # Maximum energy level
+
+congestion_increase_per_spike = 0.05 # Congestion increase per spike
+congestion_decay_rate = 0.005      # Congestion decay per time step
+max_congestion_level = 1.0         # Max congestion level
+
+
+# Function to calculate routing metrics
+def calculate_dynamic_routing_metrics(spike_monitor, source, destination, S, neuron_energy_levels, neuron_congestion_levels):
+    # Removed SpikeMonitor instantiation from here - using the one passed as argument
+    run(100 * ms)
+    spike_trains = spike_monitor.spike_trains()
+    #print(f"DEBUG: Spike Trains inside calculate_dynamic_routing_metrics for Router {source}: {spike_trains}") # DEBUG PRINT
+    firing_rates = [len(spike_trains[i]) / (simulation_time / second) if i in spike_trains else 0 for i in range(N)]
+    latencies = [spike_trains[i][0] / ms if i in spike_trains and len(spike_trains[i]) > 0 else np.inf for i in range(N)]
+
+    # ✅ Energy Consumption Model: Use stateful energy levels (already updated outside)
+    energy_consumption = neuron_energy_levels
+    congestion = neuron_congestion_levels # Use stateful congestion levels
+
+    packet_delivery_ratio = 1 - congestion # Higher congestion, lower delivery ratio, simplified
+
+    # ✅ Better Composite Score Calculation: Weighted scores, dynamic factors
+    latency_weight = 0.6
+    energy_weight = 0.3
+    congestion_weight = 0.1
+
+    composite_scores_dict = {} # Changed to dict to store scores with neuron index as key
+    composite_scores_list = [] # Keep list for sorting if needed
+    detailed_scores_dict = {}
+    for i in range(N):
+        # Use firing rate, latency, energy, congestion, and delivery ratio in score
+        latency_score = 1 / (latencies[i] + 1e-5) if latencies[i] != np.inf else 0 # Avoid inf latency
+        energy_score = 1 / (neuron_energy_levels[i] + 1e-5) # Use neuron_energy_levels[i] here
+        congestion_score = neuron_congestion_levels[i] # Use neuron_congestion_levels[i] here
+        composite_score = (latency_weight * latency_score +
+                           energy_weight * energy_score - # Lower energy consumption is better, so use inverse or subtract
+                           congestion_weight * congestion_score + firing_rates[i] * 0.1) # Firing rate also contributes positively (activity)
+        #composite_scores_dict[i] = composite_score # Store in dict with neuron index
+        #composite_scores_list.append(composite_score) # Keep list for sorting if needed
+        detailed_scores_dict[i] = { # Create inner dictionary for each neighbor 'i'
+            "composite_score": composite_score,
+            "latency_score": latency_score,
+            "energy_score": energy_score,
+            "congestion_score": congestion_score,
+            "firing_rate": firing_rates[i],
+            "latency_ms": latencies[i],
+            "energy_level": neuron_energy_levels[i],
+            "congestion_level": neuron_congestion_levels[i],
+        }
+    #print(detailed_scores_dict) #Print Detailed Scores is helpful
+    return detailed_scores_dict # Return dictionary
+
+# Find best path using Dijkstra with dynamic edge weights
+def dijkstra_dynamic_weights(spike_monitor, graph, start, end, S): # Make sure to accept spike_monitor
+    queue = [(0, start)]
+    distances = {i: float('inf') for i in graph}
+    distances[start] = 0
+    previous_nodes = {i: None for i in graph}
+
+    while queue:
+        current_distance, current_vertex = heapq.heappop(queue)
+
+        if current_distance > distances[current_vertex]:
+            continue
+
+        # ✅ Dijkstra Algorithm Limitation: Recalculate edge weights dynamically
+        dynamic_graph = create_dynamic_graph(spike_monitor, S, graph, neuron_congestion_levels) # Pass congestion levels and spike_monitor
+        if current_vertex not in dynamic_graph: # Handle cases where a node might have no outgoing edges in dynamic graph
+            continue
+
+        for neighbor, weight in dynamic_graph[current_vertex].items():
+            distance = current_distance + weight
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                previous_nodes[neighbor] = current_vertex
+                heapq.heappush(queue, (distance, neighbor))
+
+    path = []
+    current_node = end
+    while current_node is not None:
+        path.append(current_node)
+        current_node = previous_nodes[current_node]
+    path.reverse()
+    return path
+
+def create_dynamic_graph(spike_monitor, S, original_graph, neuron_congestion_levels): # Make sure to accept spike_monitor
+    dynamic_graph = {node: {} for node in original_graph}
+    spike_trains = spike_monitor.spike_trains()
+    firing_rates = [len(spike_trains[i]) / (simulation_time / second) if i in spike_trains else 0 for i in range(N)]
+    latencies = [spike_trains[i][0] / ms if i in spike_trains and len(spike_trains[i]) > 0 else np.inf for i in range(N)]
+    congestion = neuron_congestion_levels # Use stateful congestion
+
+    for i in range(len(S)):
+        src, dest = int(S.i[i]), int(S.j[i])
+        weight = float(S.w[i])
+
+        # ✅ Dijkstra Algorithm Limitation: Edge weights based on synaptic strength, latency, congestion, firing rate
+        dynamic_weight = weight * (1 + 0.1 * firing_rates[dest] - 0.05 * congestion[dest] - 0.05 * (latencies[dest] if latencies[dest] != np.inf else 0)) # Example dynamic weight formula
+        dynamic_graph[src][dest] = np.maximum(0.0, dynamic_weight) # Ensure weight is not negative
+
+    return dynamic_graph
+
+
+# --- NEW: Corrected STDP-guided pathfinding using DFS with detailed rejection logging ---
+def find_best_path_stdp_guided(spike_monitor, source, destination, S, graph, neuron_energy_levels, neuron_congestion_levels, visited=None, current_path=None, neighbor_scores_history=None): # Make sure to accept spike_monitor
+    # Removed SpikeMonitor instantiation from here - using the one passed as argument
+    if visited is None:
+        visited = set()
+    if current_path is None:
+        current_path = [source]
+    if neighbor_scores_history is None: # Initialize if not passed
+        neighbor_scores_history = {}
+
+    if source == destination:
+
+        path_score = calculate_path_score(spike_monitor, current_path, S, neuron_energy_levels, neuron_congestion_levels)
+        logging.debug(f"  Reached destination {destination} via path: {current_path}, Score: {path_score:.2f}")
+        return current_path, path_score, neighbor_scores_history # Return history
+
+    visited.add(source)
+    best_path = None
+    best_score = -np.inf  # Initialize with negative infinity
+    run(100 * ms)
+    # 1. Create Dictionary & Get Neighbor Parameters
+    detailed_scores_dict = calculate_dynamic_routing_metrics(spike_monitor, source, destination, S, neuron_energy_levels, neuron_congestion_levels) # Pass spike_monitor
+    #logging.debug(f"  Router {source}: Created neighbor parameter dictionary: {json.dumps(detailed_scores_dict, indent=2)}") # Log the dictionary
+
+    neighbor_scores = [(i, detailed_scores_dict[i]["composite_score"]) for i in range(N) if i != source and i not in visited] # Use dict for neighbor scores
+    sorted_neighbors = sorted(neighbor_scores, key=lambda x: x[1], reverse=True) # Prioritize higher scores
+
+    # Store neighbor scores for current node in history
+    neighbor_scores_history[source] = detailed_scores_dict  # Store the dict
+
+    logging.debug(f"Exploring paths from node {source}. Considered neighbors: {[(n, score) for n, score in sorted_neighbors]}")
+
+    for neighbor_index, neighbor_score in sorted_neighbors:
+        neighbor = neighbor_index
+        if neighbor not in visited: # Ensure not revisiting
+            logging.debug(f"  Router {source}: Exploring neighbor {neighbor} (score: {neighbor_score:.2f})")
+            # 4. Choose the Best Composite (Implicitly by sorted_neighbors and loop order)
+            logging.debug(f"  Router {source}: Choosing neighbor {neighbor} with best composite score: {neighbor_score:.2f}") # Highlight choice
+
+            # 5. Spike and Check New Neighbors (Recursively)
+            next_path, path_score, updated_history = find_best_path_stdp_guided(spike_monitor, neighbor, destination, S, graph, neuron_energy_levels, neuron_congestion_levels, visited, current_path + [neighbor], neighbor_scores_history) # Pass spike_monitor and history
+            neighbor_scores_history = updated_history # Update history from recursive call
+            if next_path: # Found a path from this neighbor
+                logging.debug(f"  Path found through neighbor {neighbor} from {source} to {destination}: {next_path}, Score: {path_score:.2f}")
+                if path_score > best_score:
+                    logging.debug(f"    Path through {neighbor} is better (score: {path_score:.2f} > current best: {best_score:.2f}). Updating best path.")
+                    best_score = path_score
+                    best_path = next_path
+                else:
+                    logging.debug(f"    Path through {neighbor} is NOT better (score: {path_score:.2f} <= current best: {best_score:.2f}). Rejecting path.") # Rejection reason: Score not better
+            else:
+                logging.debug(f"  No path found through neighbor {neighbor} from {source}. Rejecting neighbor path.") # Rejection reason: No path downstream
+        else:
+            logging.debug(f"  Neighbor {neighbor} already visited from {source}. Rejecting neighbor (already visited).") # Rejection reason: Already visited
+
+    if best_path:
+        logging.debug(f"Router {source}: Selected best path: {best_path} with score: {best_score:.2f}") # Log selected best path from current node
+    else:
+        logging.debug(f"Router {source}: No path found to destination.") # Log if no path found from current node
+
+    visited.remove(source) # Backtrack: Allow source to be visited in other paths
+    return best_path, best_score, neighbor_scores_history # Return history
+
+
+def calculate_path_score(spike_monitor, path, S, neuron_energy_levels, neuron_congestion_levels): # Make sure to accept spike_monitor
+    total_score = 0
+    for node in path:
+        detailed_scores = calculate_dynamic_routing_metrics(spike_monitor, node, path[-1], S, neuron_energy_levels, neuron_congestion_levels) # Pass spike_monitor
+        # ✅ Extract composite_score from detailed_scores for the current node
+        node_score = detailed_scores[node]["composite_score"]  # Access composite_score for 'node' itself
+
+        total_score += node_score # Sum the composite score of each node in the path
+    return total_score
+
+
+# --- 3. Ensure Proper Django Integration ---
+def send_status_update_api(status_data):
+    try:
+        response = requests.post(UPDATE_STATUS_API, json=status_data)
+        if response.status_code != 200:
+            logging.error(f"Failed to update status, status code: {response.status_code}, response: {response.text}")
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error updating status: {e}")
+    logging.info(f"Status Data: {status_data}") #Log Status
+    pass
+
+def send_simulation_data_api(data):
+    try:
+        response = requests.post(SEND_SIMULATION_DATA_API, json=data)
+        if response.status_code not in (200, 201):
+            logging.error(f"Failed to send simulation data, status code: {response.status_code}, response: {response.text}")
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error sending simulation data: {e}")
+    logging.info(f"Simulation Data: {data}") #Log Simulation Data
+    pass
+
+# Main simulation loop
+try:
+    current_router = 0 # Start from router 0
+
+    spike_monitor = SpikeMonitor(neurons) # ✅ Declare SpikeMonitor **ONLY ONCE** here, outside the loop
+
+    while True:
+        # spike_monitor = SpikeMonitor(neurons) # ❌ REMOVE this line - it was re-instantiating the monitor
+
+        run(simulation_time)
+        #print(f"DEBUG: Spike Trains after run(): {spike_monitor.spike_trains()}") # DEBUG PRINT - AFTER RUN
+        #Check it is changing, this is helpful
+        #logging.info(f"Spike trains: {spike_monitor.spike_trains()}")
+        spike_counts = spike_monitor.count # Spikes in this run interval
+        # --- 1. Make Energy Recovery Rate Adaptive ---
+        adaptive_recovery_rate = energy_recovery_rate / (1 + np.array(spike_counts))
+        neuron_energy_levels += adaptive_recovery_rate # Adaptive energy recovery
+        neuron_energy_levels -= spike_counts * energy_consumption_per_spike # Energy consumption
+
+        neuron_energy_levels = np.clip(neuron_energy_levels, 0, max_energy_level) # Clip energy levels
+
+        firing_rates_current_run = np.array([count / (simulation_time / second) for count in spike_counts]) # Firing rates for congestion
+        neuron_congestion_levels += firing_rates_current_run * (simulation_time / second) * congestion_increase_per_spike # Congestion increase based on firing rate over time
+
+        neuron_congestion_levels *= (1 - congestion_decay_rate) # Exponential congestion decay
+        neuron_congestion_levels = np.clip(neuron_congestion_levels, 0, max_congestion_level) # Clip congestion
+
+        status_data = get_network_status(spike_monitor, N, neuron_energy_levels, neuron_congestion_levels) # Pass spike_monitor
+        send_status_update_api(status_data) # ✅ Optimize API Calls: Less frequent status updates if needed
+
+        # Create graph & find best path
+        graph = {int(i): {} for i in range(N)}
+        for i in range(len(S)):
+            src, dest = int(S.i[i]), int(S.j[i])
+            graph[src][dest] = float(S.w[i])
+
+        #Pass the spike monitor
+
+        # ✅ Dijkstra Algorithm Limitation: Use Dijkstra with dynamic weights
+        best_path_nodes_dijkstra = dijkstra_dynamic_weights(spike_monitor, graph, 0, N-1, S) # Pass spike_monitor
+        if best_path_nodes_dijkstra: # Renamed variable
+            logging.info(f"Dijkstra Best Path: {best_path_nodes_dijkstra}") # Renamed variable
+
+            # ✅ Fix infinite recursion & select path using recursive function
+            selected_path_nodes_stdp, stdp_path_score, neighbor_scores_history = find_best_path_stdp_guided(spike_monitor, 0, N-1, S, graph, neuron_energy_levels, neuron_congestion_levels) # Pass spike_monitor
+            if selected_path_nodes_stdp:
+                logging.info(f"Selected Path (STDP-guided): {selected_path_nodes_stdp}, Score: {stdp_path_score:.2f}") # Log path and score
+                routing_path_data = { # Prepare routing path data HERE
+                    "selected_path": [int(node) for node in selected_path_nodes_stdp] if selected_path_nodes_stdp else [], # Renamed variable
+                    "stdp_path_score": stdp_path_score,
+                    "neighbor_scores_history": neighbor_scores_history # Include neighbor scores history
+                }
+                logging.debug(f"Neighbor Scores History CRYSTAL: {neighbor_scores_history}") #Not Helpful since the variables are not updated.
+            else:
+                logging.warning("No path found by STDP-guided routing.")
+                routing_path_data = None
+        else:
+            logging.warning("No path found by Dijkstra.")
+            routing_path_data = None
+
+        # --- NEW: Send Simulation Data ---
+        spike_trains = spike_monitor.spike_trains() # Use the existing spike_monitor
+        firing_rates_all_neurons = [len(spike_trains[i]) / (simulation_time / second) if i in spike_trains else 0 for i in range(N)]
+        latencies_all_neurons = [spike_trains[i][0] / ms if i in spike_trains and len(spike_trains[i]) > 0 else np.inf for i in range(N)]
+        simulation_data = {
+            "timestamp": datetime.datetime.now().isoformat(), # Add timestamp
+            "simulation_time_ms": float(simulation_time / ms), # Send simulation time
+            "firing_rates": firing_rates_all_neurons,
+            "latencies_ms": [float(lt) if lt != np.inf else -1 for lt in latencies_all_neurons], # Handle inf latency
+            "energy_levels": list(neuron_energy_levels),
+            "congestion_levels": list(neuron_congestion_levels),
+            "status_data": status_data,
+            "routing_path_data": routing_path_data, # Include routing path data HERE
+        }
+        send_simulation_data_api(simulation_data) # Send data to new endpoint
+        logging.info(f"Simulation data sent: {simulation_data}") # Log the data being sent
+
+        # Wait before next iteration
+        time.sleep(snn_settings.get("routing_update_interval", 5)) # Fetch interval from settings or default
+
+except KeyboardInterrupt:
+    logging.info("Simulation stopped by user.")
+except Exception as e:
+    logging.error(f"An error occurred: {e}", exc_info=True) # Log full exception info for debugging
