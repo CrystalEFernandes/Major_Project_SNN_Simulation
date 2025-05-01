@@ -5,8 +5,8 @@ from google.colab import files
 uploaded = files.upload()
 file_name = list(uploaded.keys())[0]
 
-PINATA_API_KEY = "897bc0dbc9c242fe0c35"
-PINATA_SECRET_API_KEY = "0c7ce37e46f40b32b70eee0f85ffcb43af2704dcb2af60e88d3d81e70c9fb436"
+PINATA_API_KEY = "a60542a4fd0e913b0d0e"
+PINATA_SECRET_API_KEY = "acf65be10c0c72bf313198ff93ec714c0303210659350be7df6355e064422cc3"
 PINATA_URL = "https://api.pinata.cloud/pinning/pinFileToIPFS"
 
 def upload_to_pinata(file_name):

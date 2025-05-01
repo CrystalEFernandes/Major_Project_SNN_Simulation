@@ -6,6 +6,7 @@ import time
 import logging
 import datetime
 import json
+import argparse
 import warnings
 
 logging.basicConfig(
@@ -533,7 +534,7 @@ def find_best_path_heuristic_guided(start_node, end_node, N, detailed_scores_dic
 
 # --- Main Simulation Loop ---
 
-def run_simulation():
+def run_simulation(single_cycle=False):
     """Runs the main SNN simulation and routing loop."""
     logging.info("--- Starting SNN Simulation ---")
 
@@ -698,6 +699,10 @@ def run_simulation():
             api_time = time.time() - api_start_time
             logging.info(f"API communication finished in {api_time:.2f} seconds.")
 
+            if single_cycle:
+                logging.info("Single cycle complete. Exiting loop.")
+                break
+
             logging.info(f"Waiting for {routing_update_interval_sec} seconds...")
             time.sleep(routing_update_interval_sec)
 
@@ -713,5 +718,13 @@ if __name__ == "__main__":
     prefs.codegen.target = 'numpy' 
 
     settings = fetch_snn_settings()
+    
+    parser = argparse.ArgumentParser(description="Run the SNN simulation.")
+    parser.add_argument(
+        "--single-cycle",
+        action="store_true",
+        help="Run the simulation for a single cycle and exit."
+    )
+    args = parser.parse_args()
 
-    run_simulation()
+    run_simulation(single_cycle=args.single_cycle)

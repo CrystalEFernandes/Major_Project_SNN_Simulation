@@ -523,34 +523,143 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
 
-PINATA_API_KEY = "897bc0dbc9c242fe0c35"
-PINATA_SECRET_API_KEY = "0c7ce37e46f40b32b70eee0f85ffcb43af2704dcb2af60e88d3d81e70c9fb436"
+PINATA_API_KEY = "a60542a4fd0e913b0d0e"
+PINATA_SECRET_API_KEY = "acf65be10c0c72bf313198ff93ec714c0303210659350be7df6355e064422cc3"
 PINATA_URL = "https://api.pinata.cloud/pinning/pinFileToIPFS"
 
+import subprocess  # For calling the simulation script
+
 def upload_to_pinata(file):
+
+    if not PINATA_API_KEY or not PINATA_SECRET_API_KEY or PINATA_API_KEY == "YOUR_PINATA_API_KEY":
+         print("ERROR: Pinata API Key or Secret Key is not configured correctly.")
+         return {"error": "Server configuration error: Pinata keys not set."}
+
     headers = {
         "pinata_api_key": PINATA_API_KEY,
         "pinata_secret_api_key": PINATA_SECRET_API_KEY,
     }
+    # Pass the file object directly, requests handles it correctly
     files = {
-        "file": (file.name, file.read())
+        "file": (file.name, file) # Pass the file object itself
+        # Optionally add pinataMetadata or pinataOptions here if needed
+        # 'pinataMetadata': ('', json.dumps({'name': f'MyCustomName_{file.name}'})),
+        # 'pinataOptions': ('', json.dumps({'cidVersion': 1}))
     }
-    response = requests.post(PINATA_URL, files=files, headers=headers)
 
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return {"error": response.text}
+    print(f"Attempting to upload '{file.name}' to Pinata at {PINATA_URL}") # Log attempt
+    try:
+        response = requests.post(PINATA_URL, files=files, headers=headers, timeout=60) # Added timeout
+
+        # --- CRITICAL DEBUG LOGGING ---
+        print(f"Pinata Response Status Code: {response.status_code}")
+        try:
+            # Try to parse as JSON, otherwise print text
+            response_data = response.json()
+            print(f"Pinata Response Body (JSON): {json.dumps(response_data, indent=2)}")
+        except json.JSONDecodeError:
+            print(f"Pinata Response Body (Text): {response.text}")
+        # --- END DEBUG LOGGING ---
+
+        if response.status_code == 200:
+            # Even with 200, check if the response *looks* like success (has IpfsHash)
+            response_json = response.json()
+            if "IpfsHash" in response_json and response_json["IpfsHash"]:
+                print("Pinata upload appears successful.")
+                return response_json # Return the successful JSON response
+            else:
+                # Got 200, but response doesn't look right
+                print("Pinata returned 200 OK, but the response JSON doesn't contain expected 'IpfsHash'.")
+                error_detail = response.text # Use text as fallback
+                try:
+                    error_detail = json.dumps(response.json())
+                except json.JSONDecodeError:
+                    pass # Keep response.text
+                return {"error": f"Pinata returned 200 OK but the response seems invalid: {error_detail}"}
+        else:
+            # Status code indicates an error
+            error_message = f"Pinata API Error (Status {response.status_code}): {response.text}"
+            print(error_message)
+            return {"error": error_message}
+
+    except requests.exceptions.RequestException as e:
+        # Handle network errors, timeouts, etc.
+        error_message = f"Network error during Pinata upload: {e}"
+        print(error_message)
+        return {"error": error_message}
+    except Exception as e:
+        # Catch any other unexpected errors during the process
+        error_message = f"An unexpected error occurred during Pinata upload: {e}"
+        print(error_message)
+        return {"error": error_message}
+
+import os
+import subprocess
+import sys # <-- Import sys
+from django.shortcuts import render
+from django.conf import settings
 
 def ipfs_upload_view(request):
     if request.method == "POST":
         uploaded_file = request.FILES.get("file")
         if uploaded_file:
-            result = upload_to_pinata(uploaded_file)
-            return render(request, "main_project/upload_result.html", {"result": result})
+            # ... (upload_to_pinata logic remains the same) ...
+            result = upload_to_pinata(uploaded_file) # Assuming this function exists
+            if "error" in result:
+                 return render(request, "main_project/upload_form.html", {"error": result["error"]})
+
+
+            # Call the simulation script for a single cycle
+            try:
+                simulation_script_path = os.path.join(settings.BASE_DIR, "scripts", "snn_simulation.py")
+                process = subprocess.run(
+                    [sys.executable, simulation_script_path, "--single-cycle"], # <-- Use sys.executable
+                    capture_output=True,
+                    text=True,
+                    check=True, # Raises CalledProcessError on non-zero exit code
+                    cwd=os.path.join(settings.BASE_DIR, "scripts") # Optional but good practice: set working directory
+                )
+                simulation_output = process.stdout
+            except subprocess.CalledProcessError as e:
+                # Log the full error for debugging
+                print(f"Subprocess Error Output:\nSTDOUT:\n{e.stdout}\nSTDERR:\n{e.stderr}")
+                return render(request, "main_project/upload_form.html", {
+                    "error": f"Simulation script failed. Check server logs for details. Error: {e.stderr}"
+                })
+            except FileNotFoundError:
+                 # Handle case where script path is wrong or python isn't found
+                 print(f"Error: Could not find script or Python executable at {sys.executable}")
+                 return render(request, "main_project/upload_form.html", {
+                    "error": "Simulation script or Python executable not found."
+                })
+
+
+            try:
+                blockchain_result = store_on_blockchain(simulation_output) # Assuming this exists
+            except Exception as e:
+                return render(request, "main_project/upload_form.html", {
+                    "error": f"Blockchain storage failed: {str(e)}"
+                })
+
+
+            return render(request, "main_project/upload_result.html", {
+                "ipfs_result": result,
+                "simulation_output": simulation_output,
+                "blockchain_result": blockchain_result,
+            })
         else:
             return render(request, "main_project/upload_form.html", {"error": "No file uploaded."})
     return render(request, "main_project/upload_form.html")
+
+def store_on_blockchain(data):
+    """
+    Stores the simulation result on the blockchain.
+    Replace this placeholder with the actual blockchain integration logic.
+    """
+    # Example: Interact with a blockchain API or smart contract
+    # Replace with your actual blockchain storage logic
+    print("Storing data on blockchain...")
+    return {"message": "Data stored on blockchain successfully."}
 
 ####RENDER GRAPH
 import json
